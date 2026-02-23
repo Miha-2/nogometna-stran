@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koncept E – Bela & Geometrično</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ── VARIABLES ─────────────────────────────────────── */
+  :root {
+    --red:        #ec343a;
+    --red-dark:   #c42a2f;
+    --white:      #ffffff;
+    --off:        #f8f6f6;
+    --gray-dark:  #373435;
+    --gray-mid:   #797d7e;
+    --gray-light: #d0d2d3;
+    --border:     #ebebeb;
+    --nav-h:      64px;
+  }
+
+  /* ── RESET ─────────────────────────────────────────── */
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Barlow', sans-serif; background:var(--white); color:var(--gray-dark); }
+
+  /* ── NAV ───────────────────────────────────────────── */
+  nav {
+    height: var(--nav-h);
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    z-index: 201;
+  }
+  .logo-mark {
+    width: 42px; height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .logo-txt {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--gray-dark); line-height: 1.2;
+  }
+  .logo-txt span {
+    display: block; font-size: 9px;
+    color: var(--gray-mid); letter-spacing: 3px; font-weight: 600;
+  }
+
+  /* Desktop nav links */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0 1rem;
+    height: var(--nav-h); line-height: var(--nav-h);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gray-mid); text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--gray-dark); }
+  .nav-links a.active  { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red); color: white !important;
+    margin-left: 1rem;
+    height: 36px !important; line-height: 36px !important;
+    padding: 0 1.5rem !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; }
+
+  /* Hamburger button */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    background: none; border: none;
+    padding: 4px;
+    z-index: 201;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%; height: 2px;
+    background: var(--gray-dark);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+
+  /* Hamburger → X animation */
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── HERO ──────────────────────────────────────────── */
+  .hero {
+    padding-top: var(--nav-h);
+    min-height: 100vh;
+    background: white;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  .hero-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .hero-content {
+    padding: 3rem 3rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-word {
+    position: absolute; bottom: 0; left: -0.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic; font-weight: 900;
+    font-size: 22vw; line-height: 0.8;
+    color: var(--off); z-index: 0;
+    pointer-events: none; user-select: none;
+    letter-spacing: -5px;
+  }
+
+  .hero-crest {
+    width: 100px; height: 100px;
+    object-fit: contain;
+    position: relative; z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+    position: relative; z-index: 1;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-label::before { content:''; width:24px; height:2px; background:var(--red); }
+
+  h1 {
+    position: relative; z-index: 1;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-style: italic;
+    font-size: clamp(4rem, 9vw, 9rem);
+    line-height: 0.88; text-transform: uppercase;
+    letter-spacing: -2px; color: var(--gray-dark);
+    margin-bottom: 2rem;
+  }
+  h1 .red   { color: var(--red); }
+  h1 .light { color: var(--gray-light); }
+
+  .hero-p {
+    position: relative; z-index: 1;
+    font-size: 1rem; color: var(--gray-mid);
+    line-height: 1.7; max-width: 400px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions {
+    position: relative; z-index: 1;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn-red {
+    background: var(--red); color: white;
+    padding: 13px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-red:hover { background: var(--red-dark); }
+
+  .btn-border {
+    background: transparent; color: var(--gray-dark);
+    padding: 13px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--border);
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-border:hover { border-color: var(--gray-dark); }
+
+  /* Red panel – right side of hero */
+  .hero-panel {
+    background: var(--red);
+    padding: 2rem 3rem 4rem;
+    display: flex; flex-direction: column;
+    justify-content: center; gap: 0;
+  }
+  .panel-section {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .panel-section:last-child { border-bottom: none; }
+  .panel-section--link { cursor: pointer; transition: background 0.15s; }
+  .panel-section--link:hover { background: rgba(255,255,255,0.07); }
+
+  .panel-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 1rem;
+  }
+  .panel-score {
+    display: flex; align-items: center; gap: 0;
+  }
+  .panel-team {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    text-transform: uppercase; color: rgba(255,255,255,0.9); flex: 1;
+  }
+  .panel-team.home { color: white; font-size: 1.2rem; }
+  .panel-num {
+    background: rgba(255,255,255,0.15); color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2rem;
+    padding: 8px 16px; line-height: 1; margin: 0 4px;
+  }
+  .panel-tag {
+    display: inline-block; margin-top: 0.6rem;
+    background: rgba(255,255,255,0.15); color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 3px 10px;
+  }
+
+  .panel-next { display: flex; align-items: center; gap: 1rem; }
+  .panel-date {
+    background: white; color: var(--red);
+    padding: 10px 14px; text-align: center; flex-shrink: 0;
+  }
+  .panel-day {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.8rem; line-height: 1;
+  }
+  .panel-mon {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .panel-match { flex: 1; }
+  .panel-match-teams {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    text-transform: uppercase; color: white;
+  }
+  .panel-match-meta { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .panel-time {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.5rem; color: white;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--gray-dark);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 3px solid var(--red);
+  }
+  .stat {
+    padding: 1.5rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.2rem;
+    color: white; line-height: 1;
+  }
+  .stat-l {
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-mid); margin-top: 4px;
+  }
+
+  /* ── TICKER ────────────────────────────────────────── */
+  .ticker {
+    background: var(--red); padding: 10px 0;
+    overflow: hidden; white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-flex; align-items: center;
+    will-change: transform;
+  }
+  .ti {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    padding: 0 2rem;
+    white-space: nowrap;
+  }
+  .ti-sep { color: rgba(255,255,255,0.3); font-size: 10px; flex-shrink: 0; }
+
+  /* ── SECTIONS ──────────────────────────────────────── */
+  section { padding: 5rem 3rem; }
+
+  .sh { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+  .sh h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.5rem;
+    text-transform: uppercase; letter-spacing: -0.5px;
+  }
+  .sh h2 em { color: var(--red); font-style: normal; }
+  .sh-line { flex: 1; height: 1px; background: var(--border); }
+  .sh a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red); text-decoration: none;
+  }
+
+  /* ── NEWS ──────────────────────────────────────────── */
+  .news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1px; background: var(--border);
+  }
+  .nc {
+    background: white; overflow: hidden;
+    text-decoration: none; color: inherit;
+    display: block; transition: background 0.15s;
+    position: relative;
+  }
+  .nc:hover { background: var(--off); }
+  .nc-thumb {
+    aspect-ratio: 16/9;
+    background: var(--off);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: var(--border);
+  }
+  .nc-bar { height: 3px; background: var(--red); }
+  .nc-tag {
+    position: absolute; top: 0; right: 0;
+    background: var(--red);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white; padding: 4px 10px;
+  }
+  .nc-body { padding: 1.3rem; }
+  .nc-date {
+    font-size: 10px; color: var(--gray-mid);
+    margin-bottom: 0.5rem; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .nc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.15rem;
+    text-transform: uppercase; color: var(--gray-dark); line-height: 1.2;
+  }
+  .nc:first-child .nc-title { font-size: 1.55rem; }
+
+  /* ── SELEKCIJE ─────────────────────────────────────── */
+  .sel-section { background: var(--off); }
+  .sel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1px; background: var(--border);
+  }
+  .si {
+    background: white; padding: 1.5rem 0.8rem;
+    text-align: center; text-decoration: none;
+    display: block; transition: all 0.15s;
+  }
+  .si:hover { background: var(--red); }
+  .si:hover .si-num { color: white; }
+  .si:hover .si-lbl { color: rgba(255,255,255,0.6); }
+  .si-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.9rem;
+    color: var(--gray-dark); line-height: 1;
+    transition: color 0.15s;
+  }
+  .si-lbl {
+    font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray-mid);
+    margin-top: 4px; transition: color 0.15s;
+  }
+
+  /* ── VPIS CTA ──────────────────────────────────────── */
+  .vpis-section {
+    background: var(--red); padding: 4rem 3rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  }
+  .vpis-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.5rem;
+    text-transform: uppercase; color: white; letter-spacing: -0.5px;
+  }
+  .vpis-section p { font-size: 14px; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
+  .btn-white-solid {
+    background: white; color: var(--red);
+    padding: 14px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+    flex-shrink: 0; display: inline-block;
+  }
+  .btn-white-solid:hover { background: var(--off); }
+
+  footer { background: var(--gray-dark); padding: 3rem; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 2rem;
+  }
+  .fn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.5rem;
+    text-transform: uppercase; color: white;
+  }
+  .ft {
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 1rem;
+  }
+  .fb { font-size: 13px; color: var(--gray-mid); line-height: 1.7; }
+  .fc h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1rem;
+  }
+  .fc ul { list-style: none; }
+  .fc li { margin-bottom: 8px; }
+  .fc a {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .fc a:hover { color: white; }
+  .footer-bar {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 1.5rem; display: flex;
+    justify-content: space-between; font-size: 12px; color: var(--gray-mid);
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+
+  /* ════════════════════════════════════════════════════
+     RESPONSIVE — tablets  ≤ 1024px
+  ════════════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 0 1.5rem; }
+    section { padding: 4rem 2rem; }
+
+    /* Compress nav links a bit */
+    .nav-links a { padding: 0 0.7rem; font-size: 13px; }
+
+    /* Hero side-by-side but less padding */
+    .hero-content { padding: 4rem 2rem 4rem; }
+    .hero-panel   { padding: 3rem 2rem; }
+
+    /* 3-col stats → 2×2 */
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.06); }
+    .stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* News: 1 big + 2 small becomes single column */
+    .news-grid { grid-template-columns: 1fr 1fr; }
+    .nc:first-child { grid-column: 1 / -1; }
+    .nc:first-child .nc-thumb { aspect-ratio: 16/7; }
+
+    /* Footer columns */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  /* ════════════════════════════════════════════════════
+     RESPONSIVE — mobile  ≤ 768px
+  ════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    :root { --nav-h: 60px; }
+    nav { padding: 0 1.2rem; }
+
+    /* Show hamburger, hide desktop links */
+    .hamburger { display: flex; }
+    .nav-links {
+      /* Full-screen overlay */
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: white;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem 0;
+      gap: 0;
+      /* Hidden by default */
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+      overflow-y: auto;
+      border-top: 3px solid var(--red);
+    }
+    .nav-links.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+    .nav-links a {
+      height: auto; line-height: normal;
+      padding: 1rem 1.5rem;
+      font-size: 1.4rem; letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      color: var(--gray-dark);
+    }
+    .nav-links a.active { color: var(--red); border-left: 4px solid var(--red); }
+    .nav-cta {
+      margin: 1rem 1.5rem 0;
+      height: 48px !important; line-height: 48px !important;
+      text-align: center; font-size: 1rem !important;
+    }
+
+    /* Hero: stack vertically */
+    .hero { min-height: auto; }
+    .hero-main { grid-template-columns: 1fr; }
+
+    .hero-content {
+      padding: 3.5rem 1.5rem 3rem;
+      border-right: none;
+      border-bottom: none;
+    }
+    .hero-bg-word { font-size: 40vw; }
+
+    h1 { font-size: clamp(3.5rem, 16vw, 6rem); margin-bottom: 1.5rem; }
+    .hero-p  { font-size: 0.95rem; margin-bottom: 2rem; }
+
+    .hero-panel { padding: 2.5rem 1.5rem; }
+    .panel-section { padding: 1.2rem 0; }
+    .panel-team { font-size: 0.95rem; }
+    .panel-team.home { font-size: 1rem; }
+    .panel-num { font-size: 1.6rem; padding: 6px 12px; }
+    .panel-match-teams { font-size: 0.95rem; }
+
+    /* Stats bar: 2×2 */
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 1.2rem 1rem; }
+    .stat-n { font-size: 1.8rem; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) {
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* News: single column */
+    .news-grid { grid-template-columns: 1fr; }
+    .nc:first-child { grid-column: auto; }
+
+    section { padding: 3rem 1.5rem; }
+    .sh h2 { font-size: 2rem; }
+
+    /* Selekcije: 4-per-row on mobile */
+    .sel-grid { grid-template-columns: repeat(4, 1fr); }
+    .si { padding: 1.2rem 0.5rem; }
+    .si-num { font-size: 1.5rem; }
+
+    /* CTA band: stack */
+    .vpis-section {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 3rem 1.5rem;
+      gap: 1.5rem;
+    }
+    .vpis-section h2 { font-size: 2rem; }
+    .btn-white-solid { width: 100%; text-align: center; }
+
+    /* Footer: single column */
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 2.5rem 1.5rem 1.5rem; }
+    .footer-bar { flex-direction: column; gap: 0.3rem; }
+  }
+
+  /* ════════════════════════════════════════════════════
+     RESPONSIVE — small mobile  ≤ 420px
+  ════════════════════════════════════════════════════ */
+  @media (max-width: 420px) {
+    h1 { font-size: clamp(3rem, 18vw, 4.5rem); }
+    .hero-content { padding: 3rem 1.2rem 2.5rem; }
+    .hero-panel   { padding: 2rem 1.2rem; }
+    .panel-score  { flex-wrap: wrap; gap: 4px; }
+    .panel-team   { font-size: 0.85rem; }
+
+    /* Selekcije: 3-per-row on very small screens */
+    .sel-grid { grid-template-columns: repeat(3, 1fr); }
+
+    section { padding: 2.5rem 1.2rem; }
+    .sh h2  { font-size: 1.7rem; }
+    .sh     { flex-wrap: wrap; gap: 0.5rem; }
+    .sh-line { display: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <img src="grb.webp" class="logo-mark" alt="NK Ivančna Gorica grb">
+    <div class="logo-txt">NK Ivančna Gorica <span>Gremo Risi!</span></div>
+  </a>
+
+  <!-- Hamburger (visible only on mobile via CSS) -->
+  <button class="hamburger" id="hamburger" aria-label="Meni" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" class="active">Domov</a></li>
+    <li><a href="#">Člani</a></li>
+    <li><a href="#">Akademija</a></li>
+    <li><a href="#">Za starše</a></li>
+    <li><a href="#">Mediji</a></li>
+    <li><a href="#">Klub</a></li>
+    <li><a href="#" class="nav-cta">Vpis 2025/26</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-main">
+
+    <div class="hero-content">
+      <div class="hero-bg-word">RISI</div>
+      <div class="hero-label">Sezona 2025/26</div>
+      <h1>NK<br>Ivančna<br>Gorica</h1>
+      <p class="hero-p">Domači klub z bogatim srcem. Skupaj gradimo prihodnost ivanjskega nogometa – od prvih korakov do članske ekipe.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-red">⚽ Vpis v šolo</a>
+      </div>
+    </div>
+
+    <div class="hero-panel" id="tekme-panel">
+      <!-- Populated by JS from API -->
+      <div class="panel-section" style="border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:1.2rem;margin-bottom:0">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.4rem">Sezona 2025/26</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;text-transform:uppercase;color:white;letter-spacing:0.5px">Regionalna Ljubljanska liga</div>
+      </div>
+      <div id="tekme-list">
+        <div class="panel-section">
+          <div class="panel-label">Nalaganje...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Let kluba</div></div>
+    <div class="stat"><div class="stat-n">13</div><div class="stat-l">Selekcij</div></div>
+    <div class="stat"><div class="stat-n">200+</div><div class="stat-l">Članov</div></div>
+    <div class="stat"><div class="stat-n">1973</div><div class="stat-l">Ustanovitev</div></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ti">NK Ivančna Gorica</span><span class="ti-sep">✦</span>
+    <span class="ti">Gremo Risi!</span><span class="ti-sep">✦</span>
+    <span class="ti">Sezona 2025/26</span><span class="ti-sep">✦</span>
+    <span class="ti">Vpis odprt</span><span class="ti-sep">✦</span>
+    <span class="ti">13 selekcij od U7 do Veteranov</span><span class="ti-sep">✦</span>
+  </div>
+</div>
+
+<!-- NOVICE -->
+<section style="background:white">
+  <div class="sh">
+    <h2>Aktualne <em>Novice</em></h2>
+    <div class="sh-line"></div>
+    <a href="#">Vse →</a>
+  </div>
+  <div class="news-grid">
+    <div class="nc">
+      <div class="nc-thumb">⚽</div>
+      <div class="nc-bar"></div>
+      <span class="nc-tag">Člani</span>
+      <div class="nc-body">
+        <div class="nc-date">15. februar 2025</div>
+        <div class="nc-title">Odmevna zmaga nad Dobljanskim tekmecem!</div>
+      </div>
+    </div>
+    <div class="nc">
+      <div class="nc-thumb" style="aspect-ratio:1">👦</div>
+      <div class="nc-bar"></div>
+      <span class="nc-tag">Akademija</span>
+      <div class="nc-body">
+        <div class="nc-date">1. feb 2025</div>
+        <div class="nc-title">Odprt vpis za 2025/26</div>
+      </div>
+    </div>
+    <div class="nc">
+      <div class="nc-thumb" style="aspect-ratio:1">🏕️</div>
+      <div class="nc-bar"></div>
+      <span class="nc-tag">Tabor</span>
+      <div class="nc-body">
+        <div class="nc-date">20. jan 2025</div>
+        <div class="nc-title">Poletni tabor 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELEKCIJE -->
+<section class="sel-section">
+  <div class="sh">
+    <h2>Naše <em>Selekcije</em></h2>
+    <div class="sh-line" style="background:var(--border)"></div>
+    <a href="#">Akademija →</a>
+  </div>
+  <div class="sel-grid">
+    <a href="#" class="si"><div class="si-num" style="color:var(--red)">1.</div><div class="si-lbl">Člani</div></a>
+    <a href="#" class="si"><div class="si-num">U19</div><div class="si-lbl">Mladinci</div></a>
+    <a href="#" class="si"><div class="si-num">U17</div><div class="si-lbl">Kadeti</div></a>
+    <a href="#" class="si"><div class="si-num">U15</div><div class="si-lbl">St. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U14</div><div class="si-lbl">St. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U13</div><div class="si-lbl">Ml. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U12</div><div class="si-lbl">Ml. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U11</div><div class="si-lbl">Ml. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U10</div><div class="si-lbl">Cicibani</div></a>
+    <a href="#" class="si"><div class="si-num">U9</div><div class="si-lbl">Cicibani</div></a>
+    <a href="#" class="si"><div class="si-num">U8</div><div class="si-lbl">Cicibani</div></a>
+    <a href="#" class="si"><div class="si-num">U7</div><div class="si-lbl">Cicibani</div></a>
+    <a href="#" class="si"><div class="si-num" style="color:var(--gray-light);font-size:1.2rem">VET</div><div class="si-lbl">Veterani</div></a>
+  </div>
+</section>
+
+<!-- VPIS CTA -->
+<div class="vpis-section">
+  <div>
+    <h2>Vpis 2025/26 — Odprt!</h2>
+    <p>Sprejemamo prijave za vse selekcije od U7 do U17. Pridi na brezplačni prvi mesec treningov!</p>
+  </div>
+  <a href="#" class="btn-white-solid">Prijavi se zdaj →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="fn">NK Ivančna Gorica</div>
+      <div class="ft">Gremo Risi! · Est. 1973</div>
+      <p class="fb">Etabliran klub iz Ivančne Gorice z bogato tradicijo.</p>
+    </div>
+    <div class="fc">
+      <h4>Klub</h4>
+      <ul>
+        <li><a href="#">O klubu</a></li>
+        <li><a href="#">Vodstvo</a></li>
+        <li><a href="#">Stadion</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Ekipe</h4>
+      <ul>
+        <li><a href="#">Člani</a></li>
+        <li><a href="#">Akademija</a></li>
+        <li><a href="#">Za starše</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="#">041 480 615</a></li>
+        <li><a href="#">041 559 712</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2025 NK Ivančna Gorica</span>
+    <span>Ljubljanska cesta 2a, Ivančna Gorica</span>
+  </div>
+</footer>
+
+<!-- Minimal JS: only hamburger toggle -->
+<script>
+  const btn   = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+
+  btn.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Seamless ticker
+(function() {
+  const track = document.getElementById('ticker-track');
+
+  function initTicker() {
+    const original = track.innerHTML;
+    let copies = 1;
+
+    // Add copies until we have at least 3x viewport width
+    while (track.scrollWidth < window.innerWidth * 3) {
+      track.innerHTML += original;
+      copies++;
+    }
+
+    const singleW = track.scrollWidth / copies;
+    let pos = 0;
+    const speed = 0.5; // px per frame ~30px/s at 60fps
+
+    function step() {
+      pos += speed;
+      if (pos >= singleW) pos -= singleW;
+      track.style.transform = `translateX(-${pos}px)`;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (document.fonts) {
+    document.fonts.ready.then(initTicker);
+  } else {
+    window.addEventListener('load', initTicker);
+  }
+})();
+
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+<!-- Tekme iz API -->
+<script>
+  const KLUB = 'gorica';
+  const API  = `http://localhost:3000/api/klub/${KLUB}/tekme?n=3`;
+
+  function jeIvancna(ime) {
+    return ime.toLowerCase().includes('ivančna') || ime.toLowerCase().includes('ivancna');
+  }
+
+  function rezultat(t) {
+    const domaci = jeIvancna(t.domacin);
+    const nasi   = domaci ? t.golDomacin : t.golGost;
+    const tuji   = domaci ? t.golGost    : t.golDomacin;
+    if (nasi > tuji) return { oznaka: '✓ Zmaga', css: 'win' };
+    if (nasi < tuji) return { oznaka: '✗ Poraz', css: 'loss' };
+    return { oznaka: '= Remi', css: 'draw' };
+  }
+
+  function renderTekme(tekme) {
+    const panel = document.getElementById('tekme-list');
+    if (!tekme || tekme.length === 0) {
+      panel.innerHTML = `
+        <div class="panel-section">
+          <div class="panel-label">Ni podatkov o tekmah</div>
+          <div style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:0.5rem">Podatki trenutno niso na voljo.</div>
+        </div>`;
+      return;
+    }
+
+    panel.innerHTML = tekme.map((t, i) => {
+      const domaci  = jeIvancna(t.domacin);
+      const res     = rezultat(t);
+      const krog    = t.krog ? `Krog ${t.krog} · ` : '';
+      const label   = `${krog}${t.datum}`;
+
+      const domIme  = t.domacin;
+      const gostIme = t.gost;
+
+      const tagStyle = res.css === 'win'  ? 'background:rgba(255,255,255,0.2);color:white'
+                     : res.css === 'loss' ? 'background:rgba(0,0,0,0.25);color:rgba(255,255,255,0.6)'
+                     :                      'background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7)';
+
+      return `
+        <a href="${t.zapisnikUrl}" target="_blank" rel="noopener"
+           class="panel-section panel-section--link"
+           style="text-decoration:none;display:block;">
+          <div class="panel-label">${label}</div>
+          <div class="panel-score">
+            <div class="panel-team ${domaci ? 'home' : ''}">${domIme}</div>
+            <div class="panel-num">${t.golDomacin}</div>
+            <div class="panel-num">${t.golGost}</div>
+            <div class="panel-team" style="text-align:right${!domaci ? ';color:white' : ''}">${gostIme}</div>
+          </div>
+          <span class="panel-tag" style="${tagStyle}">${res.oznaka}</span>
+        </a>`;
+    }).join('') + `
+        <div class="panel-section" style="border-bottom:none;padding-top:1.5rem">
+          <a href="https://www.mnzljubljana-zveza.si/index.cfm?akc=tekmovanja"
+             target="_blank" rel="noopener"
+             style="display:inline-block;background:rgba(255,255,255,0.15);color:white;
+                    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;
+                    letter-spacing:2px;text-transform:uppercase;text-decoration:none;
+                    padding:8px 18px;transition:background 0.15s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+             onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+            Lestvica →
+          </a>
+        </div>`;
+  }
+
+  fetch(API)
+    .then(r => { if (!r.ok) throw new Error('API napaka'); return r.json(); })
+    .then(data => renderTekme(data.tekme))
+    .catch(() => renderTekme(null));
+</script>
+
+</body>
+</html>

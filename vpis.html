@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vpis 2025/26 – NK Ivančna Gorica</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ── VARIABLES ─────────────────────────────────────── */
+  :root {
+    --red:        #ec343a;
+    --red-dark:   #c42a2f;
+    --white:      #ffffff;
+    --off:        #f8f6f6;
+    --gray-dark:  #373435;
+    --gray-mid:   #797d7e;
+    --gray-light: #d0d2d3;
+    --border:     #ebebeb;
+    --nav-h:      64px;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Barlow', sans-serif; background:var(--white); color:var(--gray-dark); }
+
+  /* ── NAV ───────────────────────────────────────────── */
+  nav {
+    height: var(--nav-h); background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  }
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; z-index:201; }
+  .logo-mark { width:42px; height:42px; object-fit:contain; flex-shrink:0; }
+  .logo-txt { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--gray-dark); line-height:1.2; }
+  .logo-txt span { display:block; font-size:9px; color:var(--gray-mid); letter-spacing:3px; font-weight:600; }
+
+  .nav-links { display:flex; list-style:none; align-items:center; }
+  .nav-links a { display:block; padding:0 1rem; height:var(--nav-h); line-height:var(--nav-h); font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray-mid); text-decoration:none; transition:color 0.2s; white-space:nowrap; }
+  .nav-links a:hover { color:var(--gray-dark); }
+  .nav-links a.active { color:var(--red); }
+  .nav-cta { background:var(--red); color:white !important; margin-left:1rem; height:36px !important; line-height:36px !important; padding:0 1.5rem !important; }
+  .nav-cta:hover { background:var(--red-dark) !important; }
+
+  .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; cursor:pointer; background:none; border:none; padding:4px; z-index:201; }
+  .hamburger span { display:block; width:100%; height:2px; background:var(--gray-dark); border-radius:2px; transition:transform 0.3s, opacity 0.3s; transform-origin:center; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+  /* ── PAGE HEADER ───────────────────────────────────── */
+  .page-header {
+    padding-top: var(--nav-h);
+    background: var(--red);
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '2025';
+    position: absolute; right: -1rem; bottom: -1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic; font-weight: 900;
+    font-size: 18rem; line-height: 0.8;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none; user-select: none;
+  }
+  .page-header-inner { max-width: 1200px; margin: 0 auto; padding-top: 3rem; position: relative; z-index: 1; }
+  .page-eyebrow { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:1rem; display:flex; align-items:center; gap:10px; }
+  .page-eyebrow::before { content:''; width:24px; height:2px; background:rgba(255,255,255,0.5); }
+  .page-header h1 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(3rem,7vw,6rem); text-transform:uppercase; letter-spacing:-1px; color:white; line-height:0.9; margin-bottom:1rem; }
+  .page-header p { font-size:1rem; color:rgba(255,255,255,0.75); max-width:540px; line-height:1.7; }
+
+  /* ── SHARED SECTION STYLES ─────────────────────────── */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+  section { padding: 5rem 0; }
+  .sh { display:flex; align-items:center; gap:1rem; margin-bottom:2.5rem; }
+  .sh h2 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2.2rem; text-transform:uppercase; letter-spacing:-0.5px; }
+  .sh h2 em { color:var(--red); font-style:normal; }
+  .sh-line { flex:1; height:1px; background:var(--border); }
+
+  /* ── HOW IT WORKS ──────────────────────────────────── */
+  .how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:white; }
+  .how-item { background:white; padding:2.5rem 2rem; position:relative; }
+  .how-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:5rem; color:var(--off); line-height:1; margin-bottom:1rem; }
+  .how-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.3rem; text-transform:uppercase; color:var(--gray-dark); margin-bottom:0.7rem; }
+  .how-text { font-size:14px; color:var(--gray-mid); line-height:1.7; }
+  .how-accent { width:3px; height:40px; background:var(--red); position:absolute; top:2.5rem; left:0; }
+
+  /* ── TRENERJI ──────────────────────────────────────── */
+  .trener-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1px; background:var(--border); }
+  .trener-card { background:white; padding:1.5rem; display:flex; gap:1.2rem; align-items:flex-start; }
+  .trener-avatar { width:52px; height:52px; background:var(--red); border-radius:2px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.3rem; color:white; }
+  .trener-info { flex:1; }
+  .trener-sel { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:3px; }
+  .trener-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; color:var(--gray-dark); margin-bottom:6px; }
+  .trener-tel { display:flex; align-items:center; gap:6px; font-size:14px; color:var(--gray-mid); text-decoration:none; transition:color 0.15s; }
+  .trener-tel:hover { color:var(--red); }
+
+  /* ── VADNINE ───────────────────────────────────────── */
+  .vadnine-section { background:var(--off); }
+  .vadnine-wrap { display:grid; grid-template-columns:2fr 1fr; gap:3rem; align-items:start; }
+  .vadnine-table { width:100%; border-collapse:collapse; background:white; }
+  .vadnine-table th { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gray-mid); padding:1rem 1.2rem; text-align:left; border-bottom:2px solid var(--red); }
+  .vadnine-table td { padding:0.9rem 1.2rem; font-size:14px; border-bottom:1px solid var(--border); }
+  .vadnine-table tr:last-child td { border-bottom:none; }
+  .vadnine-table tr:hover td { background:var(--off); }
+  .vadnine-table td:last-child { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.95rem; color:var(--gray-mid); }
+  .vadnine-table td:nth-child(3) { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; color:var(--gray-dark); }
+  .vadnine-note { background:white; border-left:3px solid var(--red); padding:1.5rem; }
+  .vadnine-note h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1rem; }
+  .vadnine-note p { font-size:13px; color:var(--gray-mid); line-height:1.7; margin-bottom:0.8rem; }
+  .vadnine-note p:last-child { margin-bottom:0; }
+  .vadnine-note strong { color:var(--gray-dark); }
+
+  /* ── DOKUMENTI ─────────────────────────────────────── */
+  .docs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:1px; background:var(--border); }
+  .doc-item { background:white; padding:1.3rem 1.5rem; display:flex; align-items:center; gap:1rem; text-decoration:none; color:var(--gray-dark); transition:background 0.15s; }
+  .doc-item:hover { background:var(--off); }
+  .doc-icon { width:44px; height:44px; background:var(--red); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:0.65rem; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px; color:white; }
+  .doc-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; text-transform:uppercase; letter-spacing:0.5px; line-height:1.2; }
+  .doc-type { font-size:11px; color:var(--gray-mid); margin-top:2px; }
+
+  /* ── KONTAKT CTA ───────────────────────────────────── */
+  .kontakt-band { background:var(--gray-dark); padding:4rem 0; }
+  .kontakt-inner { display:flex; align-items:center; justify-content:space-between; gap:3rem; flex-wrap:wrap; }
+  .kontakt-band h2 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2rem; text-transform:uppercase; color:white; }
+  .kontakt-band p { font-size:14px; color:var(--gray-mid); margin-top:0.3rem; }
+  .kontakt-cards { display:flex; gap:1rem; flex-wrap:wrap; }
+  .kontakt-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; text-decoration:none; transition:background 0.15s; }
+  .kontakt-card:hover { background:rgba(255,255,255,0.1); }
+  .kontakt-card-icon { font-size:1.3rem; }
+  .kontakt-card-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-mid); }
+  .kontakt-card-val { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; color:white; margin-top:1px; }
+
+  /* ── FOOTER ────────────────────────────────────────── */
+  footer { background:var(--gray-dark); border-top:1px solid rgba(255,255,255,0.07); padding:3rem; }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:2rem; }
+  .fn { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; text-transform:uppercase; color:white; }
+  .ft { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:1rem; }
+  .fb { font-size:13px; color:var(--gray-mid); line-height:1.7; }
+  .fc h4 { font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:1rem; }
+  .fc ul { list-style:none; }
+  .fc li { margin-bottom:8px; }
+  .fc a { font-size:13px; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.15s; }
+  .fc a:hover { color:white; }
+  .footer-bar { border-top:1px solid rgba(255,255,255,0.07); padding-top:1.5rem; display:flex; justify-content:space-between; font-size:12px; color:var(--gray-mid); flex-wrap:wrap; gap:0.5rem; }
+
+  /* ── RESPONSIVE ────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .how-grid { grid-template-columns:1fr 1fr; }
+    .how-grid .how-item:last-child {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 1px);
+      margin: 0 auto;
+    }
+    .vadnine-wrap { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
+  }
+  @media (max-width: 768px) {
+    :root { --nav-h:60px; }
+    nav { padding:0 1.2rem; }
+    .hamburger { display:flex; }
+    .nav-links { position:fixed; top:var(--nav-h); left:0; right:0; bottom:0; background:white; flex-direction:column; align-items:stretch; padding:1rem 0; opacity:0; pointer-events:none; transform:translateY(-8px); transition:opacity 0.25s, transform 0.25s; overflow-y:auto; border-top:3px solid var(--red); }
+    .nav-links.open { opacity:1; pointer-events:all; transform:translateY(0); }
+    .nav-links a { height:auto; line-height:normal; padding:1rem 1.5rem; font-size:1.4rem; border-bottom:1px solid var(--border); color:var(--gray-dark); }
+    .nav-links a.active { color:var(--red); border-left:4px solid var(--red); }
+    .nav-cta { margin:1rem 1.5rem 0; height:48px !important; line-height:48px !important; text-align:center; }
+
+    .page-header { padding-left:1.5rem; padding-right:1.5rem; }
+    .page-header-inner { padding-top:2rem; }
+    .wrap { padding:0 1.5rem; }
+    section { padding:3rem 0; }
+    .sh h2 { font-size:1.8rem; }
+
+    .how-grid { grid-template-columns:1fr; }
+    .how-grid .how-item:last-child { grid-column: auto; max-width:100%; margin:0; }
+    .trener-grid { grid-template-columns:1fr; }
+    .docs-grid { grid-template-columns:1fr; }
+    .kontakt-inner { flex-direction:column; align-items:flex-start; }
+    .kontakt-cards { flex-direction:column; width:100%; }
+    .footer-grid { grid-template-columns:1fr; gap:2rem; }
+    footer { padding:2.5rem 1.5rem 1.5rem; }
+  }
+  @media (max-width: 420px) {
+    .page-header h1 { font-size:2.5rem; }
+    .wrap { padding:0 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">
+    <img src="grb.webp" class="logo-mark" alt="NK Ivančna Gorica grb">
+    <div class="logo-txt">NK Ivančna Gorica <span>Gremo Risi!</span></div>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Meni" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Domov</a></li>
+    <li><a href="#">Člani</a></li>
+    <li><a href="#">Akademija</a></li>
+    <li><a href="#">Za starše</a></li>
+    <li><a href="#">Mediji</a></li>
+    <li><a href="#">Klub</a></li>
+    <li><a href="vpis.html" class="nav-cta active">Vpis 2025/26</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Sezona 2025/26</div>
+    <h1>Vpis v<br>Nogometno šolo</h1>
+    <p>Vabimo vse dečke in deklice, ki bi radi spoznali svet nogometa. Prvi dva tedna so preizkusni in brezplačni — brez obveznosti.</p>
+  </div>
+</div>
+
+<!-- KAKO POTEKA VPIS -->
+<div style="background:white">
+  <div class="wrap">
+    <section>
+      <div class="sh"><h2>Kako poteka <em>vpis</em></h2><div class="sh-line"></div></div>
+      <div class="how-grid">
+        <div class="how-item">
+          <div class="how-accent"></div>
+          <div class="how-num">01</div>
+          <div class="how-title">Pokliči trenerja ali sekretarja</div>
+          <div class="how-text">Poišči trenerja za ustrezno starostno skupino v spodnjem seznamu in ga pokliči. Dogovorita se za prvi trening.</div>
+        </div>
+        <div class="how-item">
+          <div class="how-accent"></div>
+          <div class="how-num">02</div>
+          <div class="how-title">Dva tedna preizkusno</div>
+          <div class="how-text">Prva dva tedna so brezplačna in brez obveznosti. Otrok spozna ekipo, trenerje in način dela.</div>
+        </div>
+        <div class="how-item">
+          <div class="how-accent"></div>
+          <div class="how-num">03</div>
+          <div class="how-title">Uraden vpis</div>
+          <div class="how-text">Po preizkusnem obdobju izpolnite potrebne dokumente in poravnate vadnino. Dobrodošli v klubu!</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- TRENERJI -->
+<div style="background:var(--off)">
+  <div class="wrap">
+    <section>
+      <div class="sh"><h2>Trenerji po <em>selekcijah</em></h2><div class="sh-line"></div></div>
+      <div class="trener-grid">
+
+        <div class="trener-card">
+          <div class="trener-avatar" style="font-size:1.1rem">Člani</div>
+          <div class="trener-info">
+            <div class="trener-sel">Člani</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000001" class="trener-tel">040 000 001</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U19</div>
+          <div class="trener-info">
+            <div class="trener-sel">Mladinci U19</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000002" class="trener-tel">040 000 002</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U17</div>
+          <div class="trener-info">
+            <div class="trener-sel">Kadeti U17</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000003" class="trener-tel">040 000 003</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U15</div>
+          <div class="trener-info">
+            <div class="trener-sel">Starejši dečki U15</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000004" class="trener-tel">040 000 004</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U14</div>
+          <div class="trener-info">
+            <div class="trener-sel">Starejši dečki U14</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000005" class="trener-tel">040 000 005</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U13</div>
+          <div class="trener-info">
+            <div class="trener-sel">Mlajši dečki U13</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000006" class="trener-tel">040 000 006</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U12</div>
+          <div class="trener-info">
+            <div class="trener-sel">Mlajši dečki U12</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000007" class="trener-tel">040 000 007</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar">U11</div>
+          <div class="trener-info">
+            <div class="trener-sel">Cicibani U11</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000008" class="trener-tel">040 000 008</a>
+          </div>
+        </div>
+
+        <div class="trener-card">
+          <div class="trener-avatar" style="font-size:0.9rem">U7–10</div>
+          <div class="trener-info">
+            <div class="trener-sel">Cicibani U7 – U10</div>
+            <div class="trener-name">Ime Priimek</div>
+            <a href="tel:040000009" class="trener-tel">040 000 009</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- VADNINE -->
+<div style="background:white">
+  <div class="wrap">
+    <section>
+      <div class="sh"><h2>Pravilnik o <em>Vadninah</em></h2><div class="sh-line"></div></div>
+      <div class="vadnine-wrap">
+        <table class="vadnine-table">
+          <thead>
+            <tr>
+              <th>Selekcija</th>
+              <th>Letnik rojstva</th>
+              <th>Mesečna vadnina</th>
+              <th>Meseci</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Mladinci U19</td><td>2007 – 2008</td><td>70 €</td><td>10 (julij 35 €)</td></tr>
+            <tr><td>Kadeti U17</td><td>2009 – 2010</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Starejši dečki U15</td><td>2011 – 2012</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Mlajši dečki U13 / U12</td><td>2013 – 2014</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Cicibani U9 – U11</td><td>2015 – 2017</td><td>65 €</td><td>11</td></tr>
+            <tr><td>Cicibani U8 / U7</td><td>2018 – 2019</td><td>55 €</td><td>10</td></tr>
+          </tbody>
+        </table>
+
+        <div>
+          <div class="vadnine-note">
+            <h3>Pomembne informacije</h3>
+            <p><strong>Preizkusno obdobje:</strong> Prva 2 tedna sta brezplačni za vse selekcije U7 do U15.</p>
+            <p><strong>Plačilo:</strong> Vadnina se plača mesečno na TRR kluba na podlagi izstavljenega računa. Možno je tudi enkratno plačilo letne vadnine.</p>
+            <p><strong>Družinska vadnina:</strong> Za drugega otroka iz iste družine: U7–U8 = 30 €, U9–U11 = 35 €, U12–U19 = 35 € mesečno.</p>
+            <p><strong>Zamude:</strong> Ob zamudi dveh vadnin prepoved igranja tekem; po 30 dneh prepoved treniranja.</p>
+            <p><strong>Socialna pomoč:</strong> Klub omogoča subvencionirane vadnine za socialno šibkejše družine. Povprašajte sekretarja.</p>
+          </div>
+          <a href="dokumenti/pravilnik-vadnine.pdf" target="_blank" class="doc-item" style="margin-top:1px;display:flex;">
+            <div class="doc-icon">PDF</div>
+            <div>
+              <div class="doc-name">Pravilnik o vadninah</div>
+              <div class="doc-type">PDF · Sezona 2025/26</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- DOKUMENTI -->
+<div style="background:var(--off)">
+  <div class="wrap">
+    <section>
+      <div class="sh"><h2>Pomembni <em>Dokumenti</em></h2><div class="sh-line"></div></div>
+      <div class="docs-grid">
+        <a href="dokumenti/soglasje-registracija.pdf" class="doc-item" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div>
+            <div class="doc-name">Soglasje za registracijo</div>
+            <div class="doc-type">PDF · Obvezno za vpis</div>
+          </div>
+        </a>
+        <a href="dokumenti/narocilnica-opreme.pdf" class="doc-item" target="_blank">
+          <div class="doc-icon">PDF</div>
+          <div>
+            <div class="doc-name">Naročilnica klubske opreme</div>
+            <div class="doc-type">PDF · Legea oprema</div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- KONTAKT -->
+<div class="kontakt-band">
+  <div class="wrap">
+    <div class="kontakt-inner">
+      <div>
+        <h2>Imate vprašanja?</h2>
+        <p>Pokličite nas ali pišite — z veseljem pomagamo.</p>
+      </div>
+      <div class="kontakt-cards">
+        <a href="tel:041480615" class="kontakt-card">
+          <div class="kontakt-card-icon"></div>
+          <div>
+            <div class="kontakt-card-label">Predsednik</div>
+            <div class="kontakt-card-val">041 480 615</div>
+          </div>
+        </a>
+        <a href="tel:041559712" class="kontakt-card">
+          <div class="kontakt-card-icon"></div>
+          <div>
+            <div class="kontakt-card-label">Sekretar</div>
+            <div class="kontakt-card-val">041 559 712</div>
+          </div>
+        </a>
+        <a href="mailto:nogometna.sola.ivancna.gorica@gmail.com" class="kontakt-card">
+          <div class="kontakt-card-icon"></div>
+          <div>
+            <div class="kontakt-card-label">E-pošta</div>
+            <div class="kontakt-card-val">Pišite nam</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="fn">NK Ivančna Gorica</div>
+      <div class="ft">Gremo Risi! · Est. 1973</div>
+      <p class="fb">Etabliran klub iz Ivančne Gorice z bogato tradicijo.</p>
+    </div>
+    <div class="fc"><h4>Klub</h4><ul><li><a href="#">O klubu</a></li><li><a href="#">Vodstvo</a></li><li><a href="#">Stadion</a></li></ul></div>
+    <div class="fc"><h4>Ekipe</h4><ul><li><a href="#">Člani</a></li><li><a href="#">Akademija</a></li><li><a href="#">Za starše</a></li></ul></div>
+    <div class="fc"><h4>Kontakt</h4><ul><li><a href="tel:041480615">041 480 615</a></li><li><a href="tel:041559712">041 559 712</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <span>© 2025 NK Ivančna Gorica</span>
+    <span>Ljubljanska cesta 2a, Ivančna Gorica</span>
+  </div>
+</footer>
+
+<script>
+  const btn   = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+</body>
+</html>
