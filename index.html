@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koncept E – Bela & Geometrično</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
 
   /* ── VARIABLES ─────────────────────────────────────── */
@@ -398,6 +399,7 @@
     font-weight: 900; font-size: 1.9rem;
     color: var(--gray-dark); line-height: 1;
     transition: color 0.15s;
+    text-align: center;
   }
   .si-lbl {
     font-size: 9px; letter-spacing: 2px;
@@ -654,7 +656,7 @@
       <h1>NK<br>Ivančna<br>Gorica</h1>
       <p class="hero-p">Domači klub z bogatim srcem. Skupaj gradimo prihodnost ivanjskega nogometa – od prvih korakov do članske ekipe.</p>
       <div class="hero-actions">
-        <a href="vpis.html" class="btn-red">⚽ Vpis v šolo</a>
+        <a href="vpis.html" class="btn-red">Vpis v šolo</a>
       </div>
     </div>
 
@@ -738,19 +740,19 @@
     <a href="#">Akademija →</a>
   </div>
   <div class="sel-grid">
-    <a href="#" class="si"><div class="si-num" style="color:var(--red)">1.</div><div class="si-lbl">Člani</div></a>
+    <a href="#" class="si"><div class="si-num" style="color:var(--red)">Člani</div><div class="si-lbl">Člani</div></a>
     <a href="#" class="si"><div class="si-num">U19</div><div class="si-lbl">Mladinci</div></a>
     <a href="#" class="si"><div class="si-num">U17</div><div class="si-lbl">Kadeti</div></a>
     <a href="#" class="si"><div class="si-num">U15</div><div class="si-lbl">St. dečki</div></a>
     <a href="#" class="si"><div class="si-num">U14</div><div class="si-lbl">St. dečki</div></a>
     <a href="#" class="si"><div class="si-num">U13</div><div class="si-lbl">Ml. dečki</div></a>
     <a href="#" class="si"><div class="si-num">U12</div><div class="si-lbl">Ml. dečki</div></a>
-    <a href="#" class="si"><div class="si-num">U11</div><div class="si-lbl">Ml. dečki</div></a>
+    <a href="#" class="si"><div class="si-num">U11</div><div class="si-lbl">Cicibani</div></a>
     <a href="#" class="si"><div class="si-num">U10</div><div class="si-lbl">Cicibani</div></a>
     <a href="#" class="si"><div class="si-num">U9</div><div class="si-lbl">Cicibani</div></a>
     <a href="#" class="si"><div class="si-num">U8</div><div class="si-lbl">Cicibani</div></a>
     <a href="#" class="si"><div class="si-num">U7</div><div class="si-lbl">Cicibani</div></a>
-    <a href="#" class="si"><div class="si-num" style="color:var(--gray-light);font-size:1.2rem">VET</div><div class="si-lbl">Veterani</div></a>
+    <a href="#" class="si"><div class="si-num" style="color:var(--gray-light)">VET</div><div class="si-lbl">Veterani</div></a>
   </div>
 </section>
 
@@ -758,7 +760,7 @@
 <div class="vpis-section">
   <div>
     <h2>Vpis 2025/26 — Odprt!</h2>
-    <p>Sprejemamo prijave za vse selekcije od U7 do U17. Pridi na brezplačni prvi mesec treningov!</p>
+    <p>Sprejemamo prijave za vse selekcije od U7 do U17. Prva 2 tedna sta brezplačna!</p>
   </div>
   <a href="vpis.html" class="btn-white-solid">Prijavi se zdaj →</a>
 </div>
@@ -928,6 +930,19 @@
     .then(r => { if (!r.ok) throw new Error('API napaka'); return r.json(); })
     .then(data => renderTekme(data.tekme))
     .catch(() => renderTekme(null));
+</script>
+
+<!-- Netlify Identity -->
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
 </script>
 
 </body>
