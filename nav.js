@@ -6,7 +6,7 @@ class SiteNav extends HTMLElement {
       { href: '#',           label: 'Člani' },
       { href: '#',           label: 'Akademija' },
       { href: '#',           label: 'Za starše' },
-      { href: 'novice.html', label: 'Mediji' },
+      { href: 'novice.html', label: 'Novice' },
       { href: '#',           label: 'Klub' },
     ];
 
