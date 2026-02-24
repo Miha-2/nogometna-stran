@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klub – NK Ivančna Gorica</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="theme.css">
+<script src="nav.js" defer></script>
+<script src="footer.js" defer></script>
+<style>
+
+  /* ── HEADER ─────────────────────────────────── */
+  .klub-header {
+    padding-top: var(--nav-h);
+    background: var(--gray-dark);
+    position: relative; overflow: hidden;
+  }
+  .klub-header::before {
+    content: 'KLUB';
+    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic; font-weight: 900; font-size: 20rem; line-height: 1;
+    color: rgba(255,255,255,0.04); pointer-events: none; user-select: none;
+  }
+  .klub-header-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 4rem 3rem 4rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: end; gap: 2rem;
+    position: relative; z-index: 1;
+  }
+  .klub-header-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+  }
+  .klub-header-cat::before { content:''; width:24px; height:2px; background:var(--red); }
+  .klub-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(3rem, 7vw, 6rem);
+    text-transform: uppercase; color: white;
+    letter-spacing: -2px; line-height: 0.9; margin: 0;
+  }
+  .klub-header h1 em { color: var(--red); font-style: normal; }
+  .klub-stats {
+    display: flex; gap: 2rem;
+  }
+  .klub-stat {
+    text-align: center;
+  }
+  .klub-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.5rem; color: white;
+    line-height: 1; letter-spacing: -1px;
+  }
+  .klub-stat-num span { color: var(--red); }
+  .klub-stat-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-top: 4px;
+  }
+
+  /* ── SECTION SHARED ─────────────────────────── */
+  .section { padding: 5rem 0; }
+  .section.alt { background: var(--off); }
+  .section-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+
+  /* ── O KLUBU ─────────────────────────────────── */
+  .o-klubu-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: start;
+  }
+  .o-klubu-text p {
+    font-size: 1rem; line-height: 1.85; color: var(--gray-dark);
+    margin-bottom: 1.2rem;
+  }
+  .o-klubu-facts {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--border);
+  }
+  .fact-row {
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    background: white;
+  }
+  .fact-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gray-mid);
+    padding: 1rem 1.2rem; background: var(--off);
+    display: flex; align-items: center;
+  }
+  .fact-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; color: var(--gray-dark);
+    padding: 1rem 1.2rem; display: flex; align-items: center;
+  }
+  .fact-value.red { color: var(--red); }
+
+  /* ── VODSTVO ────────────────────────────────── */
+  .vodstvo-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+  }
+  .vodstvo-card {
+    background: white;
+  }
+  .vodstvo-img {
+    aspect-ratio: 3/4; overflow: hidden;
+    background: var(--off);
+  }
+  .vodstvo-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s;
+  }
+  .vodstvo-card:hover .vodstvo-img img { transform: scale(1.04); }
+  .vodstvo-body { padding: 1.2rem; }
+  .vodstvo-role {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem;
+  }
+  .vodstvo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.3rem; text-transform: uppercase;
+    color: var(--gray-dark); line-height: 1.1; margin-bottom: 0.8rem;
+  }
+  .vodstvo-contact { display: flex; flex-direction: column; gap: 4px; }
+  .vodstvo-contact a {
+    font-size: 13px; color: var(--gray-mid); text-decoration: none;
+    transition: color 0.15s; display: flex; align-items: center; gap: 6px;
+  }
+  .vodstvo-contact a:hover { color: var(--red); }
+  .vodstvo-contact a::before {
+    content: ''; width: 4px; height: 4px;
+    background: var(--red); border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── ZGODOVINA TIMELINE ─────────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .tl-item {
+    position: relative; padding: 0 0 3rem 2.5rem;
+  }
+  .tl-item::before {
+    content: ''; position: absolute;
+    left: -2rem; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--border); border: 2px solid white;
+    box-sizing: border-box;
+  }
+  .tl-item.highlight::before { background: var(--red); border-color: var(--red); }
+  .tl-year {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 0.9rem; letter-spacing: 2px;
+    color: var(--red); margin-bottom: 0.3rem;
+  }
+  .tl-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.2rem; text-transform: uppercase;
+    color: var(--gray-dark); margin-bottom: 0.4rem;
+  }
+  .tl-text {
+    font-size: 0.9rem; line-height: 1.7; color: var(--gray-mid);
+  }
+  .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+
+  /* ── STADION ────────────────────────────────── */
+  .stadion-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .stadion-map {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--off); overflow: hidden;
+  }
+  .stadion-map iframe {
+    width: 100%; height: 100%; border: none; display: block;
+  }
+  .stadion-facts { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+
+  /* ── KONTAKT ────────────────────────────────── */
+  .kontakt-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+    background: var(--border);
+  }
+  .kontakt-card {
+    background: white; padding: 2rem;
+  }
+  .kontakt-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .kontakt-card-label::before { content:''; width:16px; height:2px; background:var(--red); }
+  .kontakt-card p {
+    font-size: 0.95rem; line-height: 1.8; color: var(--gray-dark);
+  }
+  .kontakt-card a {
+    color: var(--gray-dark); text-decoration: none; transition: color 0.15s;
+  }
+  .kontakt-card a:hover { color: var(--red); }
+  .social-links { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+  .social-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gray-dark);
+    text-decoration: none; display: flex; align-items: center; gap: 10px;
+    transition: color 0.15s;
+  }
+  .social-link:hover { color: var(--red); }
+  .social-link::before {
+    content: '→'; color: var(--red); font-size: 12px;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 1024px) {
+    .vodstvo-grid { grid-template-columns: repeat(2, 1fr); }
+    .tl-grid { grid-template-columns: 1fr; }
+    .kontakt-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .klub-header-inner { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .klub-stats { justify-content: flex-start; }
+    .section-inner { padding: 0 1.5rem; }
+    .o-klubu-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stadion-grid { grid-template-columns: 1fr; }
+    .vodstvo-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<site-nav active="klub"></site-nav>
+
+<!-- HEADER -->
+<div class="klub-header">
+  <div class="klub-header-inner">
+    <div>
+      <div class="klub-header-cat">Klub</div>
+      <h1>NK Ivančna<br><em>Gorica</em></h1>
+    </div>
+    <div class="klub-stats">
+      <div class="klub-stat">
+        <div class="klub-stat-num">1973</div>
+        <div class="klub-stat-label">Ustanovitev</div>
+      </div>
+      <div class="klub-stat">
+        <div class="klub-stat-num">350<span>+</span></div>
+        <div class="klub-stat-label">Registriranih</div>
+      </div>
+      <div class="klub-stat">
+        <div class="klub-stat-num">4<span>.</span></div>
+        <div class="klub-stat-label">Liga</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O KLUBU -->
+<section class="section">
+  <div class="section-inner">
+    <div class="sh" style="margin-bottom:2.5rem">
+      <h2>O <em>Klubu</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="o-klubu-grid">
+      <div class="o-klubu-text">
+        <p>NK Ivančna Gorica je domači klub ivanjškega nogometaša. Klub tekmuje v Regionalni Ljubljanski ligi (4. liga) pod okriljem MNZ Ljubljana in je ponos občine Ivančna Gorica že od leta 1973.</p>
+        <p>Maskota kluba <strong>Risko</strong> od leta 2010 predstavlja temeljne vrednote NK Ivančna Gorica — vztrajnost, borbenost, strast in pripadnost.</p>
+        <p>Poleg članske ekipe klub vzgaja mlade nogometaše v Nogometni šoli Ivančna Gorica, ki je bila ustanovljena leta 2010. Danes je v klubu registriranih več kot 350 aktivnih igralcev, od starosti 5 let naprej.</p>
+      </div>
+      <div class="o-klubu-facts">
+        <div class="fact-row">
+          <div class="fact-label">Ustanovitev</div>
+          <div class="fact-value red">1973</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Tekmovanje</div>
+          <div class="fact-value">Regionalna Ljubljanska liga (4. liga)</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Organizacija</div>
+          <div class="fact-value">MNZ Ljubljana</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Registrirani</div>
+          <div class="fact-value">350+ igralcev</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Naslov</div>
+          <div class="fact-value">Ljubljanska cesta 4, 1295 Ivančna Gorica</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Maskota</div>
+          <div class="fact-value">Risko (od 2010)</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Največji uspeh</div>
+          <div class="fact-value red">1. SNL 2007/08</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VODSTVO -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="sh" style="margin-bottom:2.5rem">
+      <h2>Vodstvo <em>2024/25</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="vodstvo-grid">
+
+      <div class="vodstvo-card">
+        <div class="vodstvo-img">
+          <img src="rafael_koren.webp" alt="Rafael Koren">
+        </div>
+        <div class="vodstvo-body">
+          <div class="vodstvo-role">Predsednik</div>
+          <div class="vodstvo-name">Rafael Koren</div>
+          <div class="vodstvo-contact">
+            <a href="tel:041480615">041 480 615</a>
+            <a href="mailto:ebonit.rafael@gmail.com">ebonit.rafael@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="vodstvo-card">
+        <div class="vodstvo-img">
+          <img src="ales_potokar.webp" alt="Aleš Potokar">
+        </div>
+        <div class="vodstvo-body">
+          <div class="vodstvo-role">Sekretar</div>
+          <div class="vodstvo-name">Aleš Potokar</div>
+          <div class="vodstvo-contact">
+            <a href="tel:041559712">041 559 712</a>
+            <a href="mailto:alespotokar75@gmail.com">alespotokar75@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="vodstvo-card">
+        <div class="vodstvo-img">
+          <img src="marko_jankulov.jpg" alt="Marko Jankulov">
+        </div>
+        <div class="vodstvo-body">
+          <div class="vodstvo-role">Vodja nogometne šole</div>
+          <div class="vodstvo-name">Marko Jankulov</div>
+          <div class="vodstvo-contact">
+            <a href="tel:031491997">031 491 997</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="vodstvo-card">
+        <div class="vodstvo-img">
+          <img src="dervo_ugarak.webp" alt="Dervo Ugarak">
+        </div>
+        <div class="vodstvo-body">
+          <div class="vodstvo-role">Ekonom</div>
+          <div class="vodstvo-name">Dervo Ugarak</div>
+          <div class="vodstvo-contact">
+            <a href="tel:070620277">070 620 277</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ZGODOVINA -->
+<section class="section">
+  <div class="section-inner">
+    <div class="sh" style="margin-bottom:2.5rem">
+      <h2>Zgodovina <em>Kluba</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="tl-grid">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-year">1972</div>
+          <div class="tl-title">Zvezda Črnelo</div>
+          <div class="tl-text">Na občnem zboru 15. aprila 1972 ustanovijo Športno društvo Zvezda Črnelo. Vaški fantje s Črnela so že leta igrali na travniku — zdaj dobijo uradno registracijo.</div>
+        </div>
+
+        <div class="tl-item highlight">
+          <div class="tl-year">1973</div>
+          <div class="tl-title">Ustanovitev NK Ivančna Gorica</div>
+          <div class="tl-text">11. junija 1973 se 25 ustanovnih članov zbere v Titovem domu. Klub se priključi Nogometni Podzvezi Ljubljana. Prvo tekmo odigrajo 18. junija v Mirni — izgubijo 11:6.</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1984</div>
+          <div class="tl-title">NK Livar</div>
+          <div class="tl-text">Sponzor postane IMP Livar n.sol.o. iz Ivančne Gorice. Klub se preimenuje v NK Livar in začne resno graditi infrastrukturo ter vzgajati mlade talente.</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1990–2006</div>
+          <div class="tl-title">Vzpon skozi lige</div>
+          <div class="tl-text">Pod vodstvom novih predsednikov klub vsako leto napreduje v višji rang tekmovanja — iz 5. lige vse do praga vrha slovenskega nogometa.</div>
+        </div>
+
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item highlight">
+          <div class="tl-year">2007</div>
+          <div class="tl-title">Zgodovinski vzpon v 1. SNL</div>
+          <div class="tl-text">Največji uspeh v zgodovini — zmaga v gosteh nad Bonifiko v zadnjem krogu 2. lige. NK Livar se povzpne v Prvo ligo Telekom Slovenije!</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2007/08</div>
+          <div class="tl-title">Sezona v 1. SNL</div>
+          <div class="tl-text">Krstna sezona v eliti. Zmage proti NK Drava, NK Primorje in NK Celje. Remi z državnim prvakom NK Domžale. Nepozabna izkušnja za vse navijače.</div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2010</div>
+          <div class="tl-title">Nogometna šola</div>
+          <div class="tl-text">Skupaj s starši se ustanovi Nogometna šola Ivančna Gorica. Maskota Risko se pridruži klubu. Začetek sistematične vzgoje mladih nogometašev.</div>
+        </div>
+
+        <div class="tl-item highlight">
+          <div class="tl-year">2011 – danes</div>
+          <div class="tl-title">NK Ivančna Gorica</div>
+          <div class="tl-text">Po odhodu sponzorja Livar d.d. se klub vrne k prvotnemu imenu. Danes ima 350+ registriranih igralcev in je ponos celotne ivanjške skupnosti.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STADION -->
+<section class="section alt">
+  <div class="section-inner">
+    <div class="sh" style="margin-bottom:2.5rem">
+      <h2>Stadion <em>NK Ivančna Gorica</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="stadion-grid">
+      <div class="stadion-facts">
+        <div class="fact-row">
+          <div class="fact-label">Naslov</div>
+          <div class="fact-value">Ljubljanska cesta 4, 1295 Ivančna Gorica</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Kapaciteta</div>
+          <div class="fact-value red">1500 gledalcev</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Sedišča</div>
+          <div class="fact-value">1500 (pokrita tribuna)</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Leto nastanka</div>
+          <div class="fact-value">1973</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Oprema</div>
+          <div class="fact-value">Ograja, pokrita tribuna</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Pomožno igrišče</div>
+          <div class="fact-value">Umetna trava (zahodno od stadiona)</div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-label">Opomba</div>
+          <div class="fact-value">Primeren za tekme 1. SNL</div>
+        </div>
+      </div>
+      <div class="stadion-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2777.5!2d14.8044!3d45.9394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477ada3b2e2b2b2b%3A0x1!2sLjubljanska+cesta+4%2C+1295+Ivan%C4%8Dna+Gorica!5e0!3m2!1ssl!2ssi!4v1"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="section">
+  <div class="section-inner">
+    <div class="sh" style="margin-bottom:2.5rem">
+      <h2>Kontakt <em>&amp; Lokacija</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="kontakt-grid">
+      <div class="kontakt-card">
+        <div class="kontakt-card-label">Naslov</div>
+        <p>
+          NK Ivančna Gorica<br>
+          Ljubljanska cesta 2a<br>
+          1295 Ivančna Gorica
+        </p>
+      </div>
+      <div class="kontakt-card">
+        <div class="kontakt-card-label">Telefon &amp; E-pošta</div>
+        <p>
+          <a href="tel:041480615">041 480 615</a> (predsednik)<br>
+          <a href="tel:041559712">041 559 712</a> (sekretar)<br><br>
+          <a href="mailto:nogometna.sola.ivancna.gorica@gmail.com">nogometna.sola.ivancna.gorica@gmail.com</a>
+        </p>
+      </div>
+      <div class="kontakt-card">
+        <div class="kontakt-card-label">Sledite nam</div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/nkivancnagorica" target="_blank" class="social-link">Facebook</a>
+          <a href="https://www.instagram.com/nk_ivancna_gorica" target="_blank" class="social-link">Instagram</a>
+          <a href="https://www.nkivancnagorica.eu" target="_blank" class="social-link">Stara spletna stran</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<site-footer></site-footer>
+
+</body>
+</html>
