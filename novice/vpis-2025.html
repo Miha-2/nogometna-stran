@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poletni tabor 2025 – NK Ivančna Gorica</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="../theme.css">
+<script src="../nav.js" defer></script>
+<script src="../footer.js" defer></script>
+<style>
+  .article-header {
+    padding-top: var(--nav-h);
+    background: var(--gray-dark);
+    padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .article-header::before {
+    content: 'TABOR';
+    position: absolute; right: -1rem; bottom: -2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic; font-weight: 900;
+    font-size: 14rem; line-height: 0.8;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none; user-select: none;
+  }
+  .article-header-inner {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 3rem 0;
+    position: relative; z-index: 1;
+  }
+  .article-back {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 2rem; transition: color 0.15s;
+  }
+  .article-back:hover { color: white; }
+  .article-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .article-cat::before { content:''; width:24px; height:2px; background:var(--red); }
+  .article-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(2.2rem, 5vw, 4rem);
+    text-transform: uppercase; letter-spacing: -1px;
+    color: white; line-height: 0.95; margin-bottom: 1.5rem;
+  }
+  .article-meta {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    padding-bottom: 2rem;
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .article-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 3rem 2rem;
+  }
+  .article-body p {
+    font-size: 1rem; line-height: 1.85;
+    color: var(--gray-dark); margin-bottom: 1.5rem;
+  }
+  .article-body h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.8rem;
+    text-transform: uppercase; letter-spacing: -0.3px;
+    color: var(--gray-dark); margin: 2.5rem 0 1rem;
+  }
+  .article-divider { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+
+  /* Day cards */
+  .days {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+  .day-card {
+    background: white;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+  }
+  .day-label {
+    background: var(--gray-dark);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 1.5rem 1rem; text-align: center;
+  }
+  .day-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.3rem;
+    text-transform: uppercase; color: white;
+    letter-spacing: 1px; line-height: 1;
+  }
+  .day-theme {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red); margin-top: 6px;
+  }
+  .day-body {
+    padding: 1.2rem 1.5rem;
+  }
+  .day-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    text-transform: uppercase; color: var(--gray-dark);
+    margin-bottom: 0.4rem;
+  }
+  .day-desc {
+    font-size: 13px; color: var(--gray-mid); line-height: 1.6;
+  }
+
+  /* Gallery CTA */
+  .gallery-cta {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 3rem 4rem;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+  }
+  .gallery-preview {
+    width: 100%; display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4px; position: relative;
+  }
+  .gallery-preview img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    display: block;
+  }
+  .gallery-preview img:first-child { aspect-ratio: 16/9; grid-row: span 1; }
+  .gallery-count-overlay {
+    position: absolute; bottom: 0; right: 0;
+    background: rgba(0,0,0,0.65);
+    color: white; padding: 0.6rem 1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+  }
+  .gallery-open-btn { cursor: pointer; border: none; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.95);
+    align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lb-img-wrap {
+    max-width: 90vw; max-height: 80vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #lb-img {
+    max-width: 90vw; max-height: 80vh;
+    object-fit: contain; display: block;
+  }
+  .lb-close {
+    position: absolute; top: 1rem; right: 1.5rem;
+    background: none; border: none; color: white;
+    font-size: 2.5rem; cursor: pointer; line-height: 1;
+    opacity: 0.7; transition: opacity 0.15s;
+  }
+  .lb-close:hover { opacity: 1; }
+  .lb-prev, .lb-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    font-size: 1.5rem; width: 48px; height: 64px;
+    cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.2); }
+  .lb-prev { left: 1rem; }
+  .lb-next { right: 1rem; }
+  .lb-counter {
+    color: rgba(255,255,255,0.5);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; letter-spacing: 2px;
+    margin-top: 1rem;
+  }
+  #lb-current { color: white; font-weight: 700; }
+
+  /* Related */
+  .related { background: var(--off); padding: 4rem 0; }
+  .related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+  .related-card { background:white; text-decoration:none; color:var(--gray-dark); display:flex; flex-direction:column; transition:background 0.15s; }
+  .related-card:hover { background:var(--off); }
+  .related-card-img { aspect-ratio:16/9; background:var(--off); }
+  .related-card-img.dark { background:var(--gray-dark); }
+  .related-card-img.red  { background:var(--red); }
+  .related-card-body { padding:1.2rem; }
+  .related-cat { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.4rem; }
+  .related-card h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; text-transform:uppercase; line-height:1.2; margin-bottom:0.4rem; }
+  .related-date { font-size:11px; color:var(--gray-light); }
+
+  @media (max-width: 768px) {
+    .article-header-inner { padding: 2rem 1.5rem 0; }
+    .article-body { padding: 2rem 1.5rem 2rem; }
+    .gallery-cta { padding: 0 1.5rem 3rem; }
+    .gallery-preview { grid-template-columns: 1fr 1fr; }
+    .gallery-preview img:first-child { grid-column: span 2; }
+    .day-card { grid-template-columns: 90px 1fr; }
+    .day-name { font-size: 1rem; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<site-nav active="novice"></site-nav>
+
+<div class="article-header">
+  <div class="article-header-inner">
+    <a href="../novice.html" class="article-back">← Vse novice</a>
+    <div class="article-cat">Tabor &nbsp;&middot;&nbsp; Poletje 2025</div>
+    <h1>Teden pustolovščin,<br>golov in smeha</h1>
+    <div class="article-meta">
+      <span>Poletje 2025</span>
+      <span>NK Ivančna Gorica</span>
+    </div>
+  </div>
+</div>
+
+<div class="article-body">
+
+  <p>Za nami je nepozabni poletni tabor NK Ivančna Gorica. Teden dni je bil napolnjen z nogometnimi treningi, pustolovski izleti in trenutki, ki bodo ostali v spominu tako otrok kot animatorjev. Vsi trije termini so bili razprodani, otroci pa so domov odhajali z nasmehom na obrazu.</p>
+
+  <h2>Program po dnevih</h2>
+
+  <div class="days">
+
+    <div class="day-card">
+      <div class="day-label">
+        <div class="day-name">Pon</div>
+        <div class="day-theme">Narava</div>
+      </div>
+      <div class="day-body">
+        <div class="day-title">Jamska avantura &mdash; Jama Krka</div>
+        <div class="day-desc">Voden ogled Jame Krka, naravoslovne igre in popoldanski nogometni trening z vajami koordinacije in mini igrami.</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-label">
+        <div class="day-name">Tor</div>
+        <div class="day-theme">Tekma</div>
+      </div>
+      <div class="day-body">
+        <div class="day-title">Nogometna tekma &mdash; fair-play dan</div>
+        <div class="day-desc">Taktični trening, polfinalne in finalne tekme ter nepozabni obračun animatorji proti otrokom. Dan se je zaključil s skupinskimi fotografijami in priboljški.</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-label">
+        <div class="day-name">Sre</div>
+        <div class="day-theme">Adrenalin</div>
+      </div>
+      <div class="day-body">
+        <div class="day-title">Adrenalinski dan &mdash; Park Cukarca</div>
+        <div class="day-desc">Plezalni izzivi v adrenalinskem parku Cukarca, timske štafetne igre in mini turnir 3 na 3 za zaključek dneva.</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-label">
+        <div class="day-name">Čet</div>
+        <div class="day-theme">Ljubljana</div>
+      </div>
+      <div class="day-body">
+        <div class="day-title">Z vlakom v Ljubljano &mdash; mini golf</div>
+        <div class="day-desc">Samostojna vožnja z vlakom do Ljubljane, sprehod skozi Tivoli in tekmovanje na mini golf igrišču. Za mnoge prvič z vlakom brez staršev.</div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-label">
+        <div class="day-name">Pet</div>
+        <div class="day-theme">Finale</div>
+      </div>
+      <div class="day-body">
+        <div class="day-title">Zaključni turnir &amp; podelitev medalj</div>
+        <div class="day-desc">Zadnji nogometni izzivi, penali in triki ter zaključni turnir. Vsi udeleženci so prejeli medalje in odnesli nepozabne spomine.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p>Veseli smo, da je bil tabor tako dobro sprejet. Za prihodnje leto že načrtujemo še bolj raznolik program &mdash; ostanite z nami!</p>
+
+  <hr class="article-divider">
+  <p style="font-size:13px;color:var(--gray-mid)">Foto: NK Ivančna Gorica</p>
+
+</div>
+
+<!-- GALERIJA CTA -->
+<div class="gallery-cta">
+  <div class="gallery-preview">
+    <img src="tabor_1.jpg" alt="Poletni tabor">
+    <img src="tabor_2.jpg" alt="Poletni tabor">
+    <img src="tabor_3.jpg" alt="Poletni tabor">
+    <div class="gallery-count-overlay">+38 slik</div>
+  </div>
+  <button class="btn-red gallery-open-btn" onclick="openLightbox(0)">Odpri galerijo (41 slik)</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">&times;</button>
+  <button class="lb-prev" onclick="changeSlide(-1)">&#8592;</button>
+  <button class="lb-next" onclick="changeSlide(1)">&#8594;</button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="Poletni tabor">
+  </div>
+  <div class="lb-counter"><span id="lb-current">1</span> / 41</div>
+</div>
+
+<!-- SORODNE NOVICE -->
+<div class="related">
+  <div class="wrap">
+    <div class="sh" style="margin-bottom:1.5rem">
+      <h2>Sorodne <em>Novice</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="related-grid">
+      <a href="zmaga-dragomer.html" class="related-card">
+        <div class="related-card-img dark"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Člani</div>
+          <h3>Risi razorožili vodilne &mdash; zmaga 4:1</h3>
+          <div class="related-date">Februar 2026</div>
+        </div>
+      </a>
+      <a href="vpis-2025.html" class="related-card">
+        <div class="related-card-img red"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Klub</div>
+          <h3>Vpis v nogometno šolo 2025/26 je odprt!</h3>
+          <div class="related-date">Avgust 2025</div>
+        </div>
+      </a>
+      <a href="novica.html" class="related-card">
+        <div class="related-card-img"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Akademija</div>
+          <h3>Nova oprema za mlajše selekcije</h3>
+          <div class="related-date">18. januar 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<site-footer></site-footer>
+
+
+<script>
+  const total = 41;
+  const imgs = Array.from({length: total}, (_, i) => `tabor_${i+1}.jpg`);
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showSlide();
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox')) return;
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeSlide(dir) {
+    current = (current + dir + total) % total;
+    showSlide();
+  }
+
+  function showSlide() {
+    document.getElementById('lb-img').src = imgs[current];
+    document.getElementById('lb-current').textContent = current + 1;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowRight') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'Escape') {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
