@@ -3,119 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Koncept E – Bela & Geometrično</title>
+<title>NK Ivančna Gorica</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="nav.js" defer></script>
+<script src="footer.js" defer></script>
 <style>
-
-  /* ── VARIABLES ─────────────────────────────────────── */
-  :root {
-    --red:        #ec343a;
-    --red-dark:   #c42a2f;
-    --white:      #ffffff;
-    --off:        #f8f6f6;
-    --gray-dark:  #373435;
-    --gray-mid:   #797d7e;
-    --gray-light: #d0d2d3;
-    --border:     #ebebeb;
-    --nav-h:      64px;
-  }
-
-  /* ── RESET ─────────────────────────────────────────── */
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Barlow', sans-serif; background:var(--white); color:var(--gray-dark); }
-
-  /* ── NAV ───────────────────────────────────────────── */
-  nav {
-    height: var(--nav-h);
-    background: white;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2.5rem;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    z-index: 201;
-  }
-  .logo-mark {
-    width: 42px; height: 42px;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-  .logo-txt {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 1rem;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--gray-dark); line-height: 1.2;
-  }
-  .logo-txt span {
-    display: block; font-size: 9px;
-    color: var(--gray-mid); letter-spacing: 3px; font-weight: 600;
-  }
-
-  /* Desktop nav links */
-  .nav-links {
-    display: flex;
-    list-style: none;
-    align-items: center;
-  }
-  .nav-links a {
-    display: block;
-    padding: 0 1rem;
-    height: var(--nav-h); line-height: var(--nav-h);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 600; font-size: 14px;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--gray-mid); text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .nav-links a:hover,
-  .nav-links a.active { color: var(--gray-dark); }
-  .nav-links a.active  { color: var(--red); }
-
-  .nav-cta {
-    background: var(--red); color: white !important;
-    margin-left: 1rem;
-    height: 36px !important; line-height: 36px !important;
-    padding: 0 1.5rem !important;
-  }
-  .nav-cta:hover { background: var(--red-dark) !important; }
-
-  /* Hamburger button */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 36px; height: 36px;
-    cursor: pointer;
-    background: none; border: none;
-    padding: 4px;
-    z-index: 201;
-  }
-  .hamburger span {
-    display: block;
-    width: 100%; height: 2px;
-    background: var(--gray-dark);
-    border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s;
-    transform-origin: center;
-  }
-
-  /* Hamburger → X animation */
-  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
   /* ── HERO ──────────────────────────────────────────── */
   .hero {
     padding-top: var(--nav-h);
@@ -618,32 +511,12 @@
     .sh-line { display: none; }
   }
 
+
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">
-    <img src="grb.webp" class="logo-mark" alt="NK Ivančna Gorica grb">
-    <div class="logo-txt">NK Ivančna Gorica <span>Gremo Risi!</span></div>
-  </a>
-
-  <!-- Hamburger (visible only on mobile via CSS) -->
-  <button class="hamburger" id="hamburger" aria-label="Meni" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#" class="active">Domov</a></li>
-    <li><a href="#">Člani</a></li>
-    <li><a href="#">Akademija</a></li>
-    <li><a href="#">Za starše</a></li>
-    <li><a href="novice.html">Mediji</a></li>
-    <li><a href="#">Klub</a></li>
-    <li><a href="vpis.html" class="nav-cta">Vpis 2025/26</a></li>
-  </ul>
-</nav>
+<site-nav active="domov"></site-nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -698,7 +571,7 @@
   <div class="sh">
     <h2>Aktualne <em>Novice</em></h2>
     <div class="sh-line"></div>
-    <a href="novice.html">Vse →</a>
+    <a href="#">Vse →</a>
   </div>
   <div class="news-grid">
     <div class="nc">
@@ -764,56 +637,11 @@
   <a href="vpis.html" class="btn-white-solid">Prijavi se zdaj →</a>
 </div>
 
+
 <!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="fn">NK Ivančna Gorica</div>
-      <div class="ft">Gremo Risi! · Est. 1973</div>
-      <p class="fb">Etabliran klub iz Ivančne Gorice z bogato tradicijo.</p>
-    </div>
-    <div class="fc">
-      <h4>Klub</h4>
-      <ul>
-        <li><a href="#">O klubu</a></li>
-        <li><a href="#">Vodstvo</a></li>
-        <li><a href="#">Stadion</a></li>
-      </ul>
-    </div>
-    <div class="fc">
-      <h4>Ekipe</h4>
-      <ul>
-        <li><a href="#">Člani</a></li>
-        <li><a href="#">Akademija</a></li>
-        <li><a href="#">Za starše</a></li>
-      </ul>
-    </div>
-    <div class="fc">
-      <h4>Kontakt</h4>
-      <ul>
-        <li><a href="#">041 480 615</a></li>
-        <li><a href="#">041 559 712</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bar">
-    <span>© 2025 NK Ivančna Gorica</span>
-    <span>Ljubljanska cesta 2a, Ivančna Gorica</span>
-  </div>
-</footer>
+<site-footer></site-footer>
 
-<!-- Minimal JS: only hamburger toggle -->
-<script>
-  const btn   = document.getElementById('hamburger');
-  const links = document.getElementById('navLinks');
-
-  btn.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('open');
-    btn.classList.toggle('open', isOpen);
-    btn.setAttribute('aria-expanded', isOpen);
-  });
-
-  // Seamless ticker
+<!-- Seamless ticker
 (function() {
   const track = document.getElementById('ticker-track');
 
@@ -930,6 +758,7 @@
     .then(data => renderTekme(data.tekme))
     .catch(() => renderTekme(null));
 </script>
+
 
 </body>
 </html>
