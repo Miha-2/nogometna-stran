@@ -10,55 +10,8 @@
 <script src="../nav.js" defer></script>
 <script src="../footer.js" defer></script>
 <style>
-  .article-header {
-    padding-top: var(--nav-h);
-    background: var(--red);
-    padding-bottom: 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .article-header::before {
-    content: '2025';
-    position: absolute; right: -1rem; bottom: -2rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-style: italic; font-weight: 900;
-    font-size: 18rem; line-height: 0.8;
-    color: rgba(255,255,255,0.08);
-    pointer-events: none; user-select: none;
-  }
-  .article-header-inner {
-    max-width: 860px; margin: 0 auto;
-    padding: 3rem 3rem 0;
-    position: relative; z-index: 1;
-  }
-  .article-back {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 12px; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-bottom: 2rem; transition: color 0.15s;
-  }
   .article-back:hover { color: white; }
-  .article-cat {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.6);
-    margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 10px;
-  }
   .article-cat::before { content:''; width:24px; height:2px; background:white; }
-  .article-header h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900; font-size: clamp(2.2rem, 5vw, 4rem);
-    text-transform: uppercase; letter-spacing: -1px;
-    color: white; line-height: 0.95; margin-bottom: 1.5rem;
-  }
-  .article-meta {
-    font-size: 12px; color: rgba(255,255,255,0.45);
-    padding-bottom: 2rem;
-    display: flex; gap: 1.5rem; flex-wrap: wrap;
-  }
 
   .article-body {
     max-width: 860px; margin: 0 auto;
@@ -113,7 +66,6 @@
   .related-date { font-size:11px; color:var(--gray-light); }
 
   @media (max-width: 768px) {
-    .article-header-inner { padding: 2rem 1.5rem 0; }
     .article-body { padding: 2rem 1.5rem 2rem; }
     .article-promo { padding: 0 1.5rem 2rem; }
     .related-grid { grid-template-columns: 1fr; }
@@ -124,12 +76,12 @@
 
 <site-nav active="novice"></site-nav>
 
-<div class="article-header">
-  <div class="article-header-inner">
-    <a href="../novice.html" class="article-back">← Vse novice</a>
-    <div class="article-cat">Klub &nbsp;&middot;&nbsp; Vpis</div>
+<div class="page-header red" style="--ph-watermark:'VPIS'">
+  <div class="page-header-inner">
+    <a href="../novice.html" class="page-back">← Vse novice</a>
+    <div class="page-eyebrow">Klub &nbsp;&middot;&nbsp; Vpis</div>
     <h1>Vpis v nogometno šolo 2025/26 je odprt!</h1>
-    <div class="article-meta">
+    <div class="page-header-meta">
       <span>Avgust 2025</span>
       <span>NK Ivančna Gorica</span>
     </div>

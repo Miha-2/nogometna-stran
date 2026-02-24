@@ -52,30 +52,79 @@ body { font-family:'Barlow', sans-serif; background:var(--white); color:var(--gr
 /* ── PAGE HEADER (shared subpage style) ────────────── */
 .page-header {
   padding-top: var(--nav-h);
-  padding-bottom: 3rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  background: var(--gray-dark);
   position: relative;
   overflow: hidden;
 }
-.page-header-inner { max-width: 1200px; margin: 0 auto; padding-top: 3rem; position: relative; z-index: 1; }
+.page-header.red { background: var(--red); }
+
+/* watermark — set --ph-watermark on the element */
+.page-header::before {
+  content: var(--ph-watermark, '');
+  position: absolute; right: -1rem; bottom: -2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 16rem; line-height: 0.8;
+  color: rgba(255,255,255,0.05);
+  pointer-events: none; user-select: none;
+}
+.page-header-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 3rem 0;
+  position: relative; z-index: 1;
+}
+.page-header-inner.with-stats {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: end; gap: 2rem;
+}
+.page-back {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 12px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 2rem; transition: color 0.15s;
+}
+.page-back:hover { color: white; }
 .page-eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px; font-weight: 700;
-  letter-spacing: 4px; text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--red);
   margin-bottom: 1rem;
   display: flex; align-items: center; gap: 10px;
 }
-.page-eyebrow::before { content:''; width:24px; height:2px; background:var(--red); }
+.page-header.red .page-eyebrow { color: rgba(255,255,255,0.6); }
+.page-eyebrow::before { content:''; width:24px; height:2px; background:currentColor; }
 .page-header h1 {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   text-transform: uppercase;
   letter-spacing: -1px;
   color: white;
   line-height: 0.9;
+  margin-bottom: 1.5rem;
+}
+.page-header h1 em { color: var(--red); font-style: normal; }
+.page-header.red h1 em { color: white; opacity: 0.7; }
+.page-header-meta {
+  font-size: 12px; color: rgba(255,255,255,0.35);
+  padding-bottom: 2rem;
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+}
+/* Stats block (for klub-type pages) */
+.page-stats {
+  display: flex; gap: 2rem; padding-bottom: 3rem;
+}
+.page-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 2.5rem; color: white;
+  line-height: 1; letter-spacing: -1px;
+}
+.page-stat-label {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-top: 4px;
 }
 
 /* ── SECTION HEADER ────────────────────────────────── */
@@ -109,8 +158,8 @@ site-footer footer, footer {
 }
 @media (max-width: 768px) {
   :root { --nav-h: 60px; }
-  .page-header { padding-left:1.5rem; padding-right:1.5rem; }
-  .page-header-inner { padding-top:2rem; }
+  .page-header-inner { padding: 2rem 1.5rem 0; }
+  .page-header-inner.with-stats { grid-template-columns: 1fr; }
   .wrap { padding:0 1.5rem; }
   .sh h2 { font-size:1.8rem; }
   .footer-grid { grid-template-columns:1fr; gap:2rem; }
