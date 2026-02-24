@@ -27,8 +27,8 @@ class SiteFooter extends HTMLElement {
           <div class="fc">
             <h4>Kontakt</h4>
             <ul>
-              <li><a href="tel:041480615">041 480 615</a></li>
-              <li><a href="tel:041559712">041 559 712</a></li>
+              <li><a href="tel:041480615">041 480 615 <span style="color:var(--gray-mid);font-size:11px">(predsednik)</span></a></li>
+              <li><a href="tel:041559712">041 559 712 <span style="color:var(--gray-mid);font-size:11px">(sekretar)</span></a></li>
             </ul>
           </div>
         </div>
