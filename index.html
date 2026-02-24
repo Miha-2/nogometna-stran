@@ -642,31 +642,39 @@
 <!-- FOOTER -->
 <site-footer></site-footer>
 
-<!-- Seamless ticker
+<script>
 (function() {
   const track = document.getElementById('ticker-track');
 
   function initTicker() {
-    const original = track.innerHTML;
-    let copies = 1;
+    requestAnimationFrame(() => {
+      const original = track.innerHTML;
+      let copies = 1;
 
-    // Add copies until we have at least 3x viewport width
-    while (track.scrollWidth < window.innerWidth * 3) {
-      track.innerHTML += original;
-      copies++;
-    }
+      while (track.scrollWidth < window.innerWidth * 3) {
+        track.innerHTML += original;
+        copies++;
+        if (copies > 20) break;
+      }
 
-    const singleW = track.scrollWidth / copies;
-    let pos = 0;
-    const speed = 0.5; // px per frame ~30px/s at 60fps
+      const singleW = track.scrollWidth / copies;
+      if (singleW <= 0) {
+        // scrollWidth not ready yet, retry
+        setTimeout(initTicker, 100);
+        return;
+      }
 
-    function step() {
-      pos += speed;
-      if (pos >= singleW) pos -= singleW;
-      track.style.transform = `translateX(-${pos}px)`;
+      let pos = 0;
+      const speed = 0.5;
+
+      function step() {
+        pos += speed;
+        if (pos >= singleW) pos -= singleW;
+        track.style.transform = `translateX(-${pos}px)`;
+        requestAnimationFrame(step);
+      }
       requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+    });
   }
 
   if (document.fonts) {
@@ -675,14 +683,6 @@
     window.addEventListener('load', initTicker);
   }
 })();
-
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', false);
-    });
-  });
 </script>
 <!-- Tekme iz API -->
 <script>
