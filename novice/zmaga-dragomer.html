@@ -143,43 +143,73 @@
     padding: 4px 12px; color: var(--gray-dark);
   }
 
-  /* Gallery */
-  .gallery {
+  /* Gallery CTA */
+  .gallery-cta {
     max-width: 860px; margin: 0 auto;
     padding: 0 3rem 4rem;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
   }
-  .gallery h2 {
+  .gallery-preview {
+    width: 100%; display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4px; position: relative;
+  }
+  .gallery-preview img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    display: block; cursor: pointer; transition: opacity 0.15s;
+  }
+  .gallery-preview img:hover { opacity: 0.85; }
+  .gallery-preview img:first-child { aspect-ratio: 16/9; }
+  .gallery-count-overlay {
+    position: absolute; bottom: 0; right: 0;
+    background: rgba(0,0,0,0.65);
+    color: white; padding: 0.6rem 1rem;
     font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900; font-size: 1.4rem;
-    text-transform: uppercase; margin-bottom: 1rem;
-    color: var(--gray-dark);
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+    cursor: pointer;
   }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+  .gallery-open-btn { cursor: pointer; border: none; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.95);
+    align-items: center; justify-content: center;
+    flex-direction: column;
   }
-  .gallery-grid a {
-    aspect-ratio: 4/3;
-    background: var(--off);
-    display: block; overflow: hidden;
-  }
-  .gallery-grid a:first-child {
-    grid-column: span 2; aspect-ratio: 16/9;
-  }
-  .gallery-grid img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.3s;
-  }
-  .gallery-grid a:hover img { transform: scale(1.03); }
-  /* Placeholder when no images */
-  .gallery-placeholder {
-    aspect-ratio: 4/3; background: var(--off);
+  .lightbox.active { display: flex; }
+  .lb-img-wrap {
+    max-width: 90vw; max-height: 80vh;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gray-light);
   }
+  #lb-img {
+    max-width: 90vw; max-height: 80vh;
+    object-fit: contain; display: block;
+  }
+  .lb-close {
+    position: absolute; top: 1rem; right: 1.5rem;
+    background: none; border: none; color: white;
+    font-size: 2.5rem; cursor: pointer; line-height: 1;
+    opacity: 0.7; transition: opacity 0.15s;
+  }
+  .lb-close:hover { opacity: 1; }
+  .lb-prev, .lb-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    font-size: 1.5rem; width: 48px; height: 64px;
+    cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.2); }
+  .lb-prev { left: 1rem; }
+  .lb-next { right: 1rem; }
+  .lb-counter {
+    color: rgba(255,255,255,0.5);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; letter-spacing: 2px;
+    margin-top: 1rem;
+  }
+  #lb-current { color: white; font-weight: 700; }
 
   /* Related */
   .related { background: var(--off); padding: 4rem 0; }
@@ -197,9 +227,8 @@
   @media (max-width: 768px) {
     .article-header-inner { padding: 2rem 1.5rem 0; }
     .article-body { padding: 2rem 1.5rem 2rem; }
-    .gallery { padding: 0 1.5rem 3rem; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .gallery-grid a:first-child { grid-column: span 2; }
+    .gallery-cta { padding: 0 1.5rem 3rem; }
+    .gallery-preview { grid-template-columns: 1fr 1fr; }
     .score-box { gap: 1rem; padding: 1.5rem 1rem; }
     .score-result { font-size: 3rem; }
     .related-grid { grid-template-columns: 1fr; }
@@ -265,27 +294,24 @@
 </div>
 
 <!-- GALERIJA -->
-<div class="gallery">
-  <h2>Fotografije</h2>
-  <div class="gallery-grid">
-    <!-- ZAMENJAJ src z dejanskimi slikami -->
-    <a href="novica1_1.jpg">
-      <img src="novica1_1.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
-           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 1'">
-    </a>
-    <a href="novica1_2.jpg">
-      <img src="novica1_2.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
-           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 2'">
-    </a>
-    <a href="novica1_3.jpg">
-      <img src="novica1_3.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
-           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 3'">
-    </a>
-    <a href="novica1_4.jpg">
-      <img src="novica1_4.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
-           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 4'">
-    </a>
+<div class="gallery-cta">
+  <div class="gallery-preview" style="cursor:pointer">
+    <img src="novica1_1.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer" onclick="openLightbox(0)">
+    <img src="novica1_2.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer" onclick="openLightbox(1)">
+    <div class="gallery-count-overlay" onclick="openLightbox(0)">+2 sliki</div>
   </div>
+  <button class="btn-red gallery-open-btn" onclick="openLightbox(0)">Odpri galerijo (4 slike)</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">&times;</button>
+  <button class="lb-prev" onclick="changeSlide(-1)">&#8592;</button>
+  <button class="lb-next" onclick="changeSlide(1)">&#8594;</button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="Tekma NK Ivančna Gorica - NK Dragomer">
+  </div>
+  <div class="lb-counter"><span id="lb-current">1</span> / 4</div>
 </div>
 
 <!-- SORODNE NOVICE -->
@@ -326,5 +352,44 @@
 
 <site-footer></site-footer>
 
+
+<script>
+  const total = 4;
+  const imgs = ['novica1_1.jpg','novica1_2.jpg','novica1_3.jpg','novica1_4.jpg'];
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showSlide();
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox')) return;
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeSlide(dir) {
+    current = (current + dir + total) % total;
+    showSlide();
+  }
+
+  function showSlide() {
+    document.getElementById('lb-img').src = imgs[current];
+    document.getElementById('lb-current').textContent = current + 1;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowRight') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'Escape') {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
 </body>
 </html>
