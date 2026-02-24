@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zmaga 4:1 proti NK Dragomeru – NK Ivančna Gorica</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="../theme.css">
+<script src="../nav.js" defer></script>
+<script src="../footer.js" defer></script>
+<style>
+  .article-header {
+    padding-top: var(--nav-h);
+    background: var(--gray-dark);
+    padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .article-header::before {
+    content: '4:1';
+    position: absolute; right: -1rem; bottom: -2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-style: italic; font-weight: 900;
+    font-size: 18rem; line-height: 0.8;
+    color: rgba(255,255,255,0.05);
+    pointer-events: none; user-select: none;
+  }
+  .article-header-inner {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 3rem 0;
+    position: relative; z-index: 1;
+  }
+  .article-back {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 2rem; transition: color 0.15s;
+  }
+  .article-back:hover { color: white; }
+  .article-cat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .article-cat::before { content:''; width:24px; height:2px; background:var(--red); }
+  .article-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(2.2rem, 5vw, 4rem);
+    text-transform: uppercase; letter-spacing: -1px;
+    color: white; line-height: 0.95; margin-bottom: 1.5rem;
+  }
+  .article-meta {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    padding-bottom: 2rem;
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .article-hero-img {
+    width: 100%; max-width: 860px; margin: 0 auto;
+    aspect-ratio: 16/7;
+    background: #2a2627;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 5rem;
+    color: rgba(255,255,255,0.05);
+    overflow: hidden;
+  }
+  .article-hero-img img { width:100%; height:100%; object-fit:cover; }
+
+  .article-body {
+    max-width: 860px; margin: 0 auto;
+    padding: 3rem 3rem 2rem;
+  }
+  .article-body p {
+    font-size: 1rem; line-height: 1.85;
+    color: var(--gray-dark); margin-bottom: 1.5rem;
+  }
+  .article-body h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.8rem;
+    text-transform: uppercase; letter-spacing: -0.3px;
+    color: var(--gray-dark); margin: 2.5rem 0 1rem;
+  }
+  .article-divider { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+
+  /* Score box */
+  .score-box {
+    display: flex; align-items: center; justify-content: center;
+    gap: 2rem; padding: 2rem;
+    background: var(--gray-dark);
+    margin-bottom: 2.5rem;
+  }
+  .score-team {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+    text-align: center; flex: 1;
+  }
+  .score-team strong {
+    display: block; font-size: 1.3rem;
+    color: white; margin-bottom: 4px;
+  }
+  .score-center {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .score-result {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 4rem;
+    color: var(--red); letter-spacing: -2px;
+    line-height: 1;
+  }
+  .score-label {
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+  }
+
+  /* Scorers */
+  .scorers {
+    background: var(--off); padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    align-items: center;
+  }
+  .scorers-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    white-space: nowrap;
+  }
+  .scorers-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .scorer-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 14px;
+    background: white; border: 1px solid var(--border);
+    padding: 4px 12px; color: var(--gray-dark);
+  }
+
+  /* Gallery */
+  .gallery {
+    max-width: 860px; margin: 0 auto;
+    padding: 0 3rem 4rem;
+  }
+  .gallery h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.4rem;
+    text-transform: uppercase; margin-bottom: 1rem;
+    color: var(--gray-dark);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+  .gallery-grid a {
+    aspect-ratio: 4/3;
+    background: var(--off);
+    display: block; overflow: hidden;
+  }
+  .gallery-grid a:first-child {
+    grid-column: span 2; aspect-ratio: 16/9;
+  }
+  .gallery-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.3s;
+  }
+  .gallery-grid a:hover img { transform: scale(1.03); }
+  /* Placeholder when no images */
+  .gallery-placeholder {
+    aspect-ratio: 4/3; background: var(--off);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray-light);
+  }
+
+  /* Related */
+  .related { background: var(--off); padding: 4rem 0; }
+  .related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+  .related-card { background:white; text-decoration:none; color:var(--gray-dark); display:flex; flex-direction:column; transition:background 0.15s; }
+  .related-card:hover { background:var(--off); }
+  .related-card-img { aspect-ratio:16/9; background:var(--off); display:flex; align-items:center; justify-content:center; }
+  .related-card-img.dark { background:var(--gray-dark); }
+  .related-card-img.red  { background:var(--red); }
+  .related-card-body { padding:1.2rem; }
+  .related-cat { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.4rem; }
+  .related-card h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; text-transform:uppercase; line-height:1.2; margin-bottom:0.4rem; }
+  .related-date { font-size:11px; color:var(--gray-light); }
+
+  @media (max-width: 768px) {
+    .article-header-inner { padding: 2rem 1.5rem 0; }
+    .article-body { padding: 2rem 1.5rem 2rem; }
+    .gallery { padding: 0 1.5rem 3rem; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid a:first-child { grid-column: span 2; }
+    .score-box { gap: 1rem; padding: 1.5rem 1rem; }
+    .score-result { font-size: 3rem; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<site-nav active="novice"></site-nav>
+
+<div class="article-header">
+  <div class="article-header-inner">
+    <a href="../novice.html" class="article-back">← Vse novice</a>
+    <div class="article-cat">Člani &nbsp;&middot;&nbsp; Pripravljalna tekma</div>
+    <h1>Risi razorožili vodilne &mdash;<br>zmaga 4:1 nad NK Dragomerom</h1>
+    <div class="article-meta">
+      <span>Februar 2026</span>
+      <span>NK Ivančna Gorica</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="article-body">
+
+  <!-- SCORE BOX -->
+  <div class="score-box">
+    <div class="score-team">
+      <strong>NK Ivančna Gorica</strong>
+      Domači
+    </div>
+    <div class="score-center">
+      <div class="score-result">4 : 1</div>
+      <div class="score-label">Pripravljalna tekma</div>
+    </div>
+    <div class="score-team">
+      <strong>NK Dragomer</strong>
+      Gostje
+    </div>
+  </div>
+
+  <!-- SCORERS -->
+  <div class="scorers">
+    <div class="scorers-label">Strelci</div>
+    <div class="scorers-list">
+      <span class="scorer-pill">Fortuna</span>
+      <span class="scorer-pill">Perič</span>
+      <span class="scorer-pill">Karajbić</span>
+      <span class="scorer-pill">Avtogol</span>
+    </div>
+  </div>
+
+  <p>Risi so v drugi pripravljalni tekmi zimskega pripravljalnega obdobja prikazali prepričljivo predstavo in zasluženo premagali NK Dragomer, vodilno ekipo MNZ tekmovanja, z rezultatom 4:1.</p>
+
+  <p>Varovanci trenerja Gorana Kovačeviča so pokazali kombinatorno in organizirano igro ter po zaslugah slavili proti kvalitetnemu tekmecu. Kot zanimivost velja omeniti, da je goste vodil nekdanji igralec Ivančne Gorice Željko Mitrakovč.</p>
+
+  <p>Tekma je bila hkrati priložnost za predstavitev novih okrepitev. Iz NK Brinja so na posojo prišli Cingerle Savić, Hamulić, Kenk in Lazarević, iz NK Krke pa Stopar Golob. V ekipo se po odsotnosti vračata tudi bivša risa Pavlin Tilen in Karajbić Enes.</p>
+
+  <hr class="article-divider">
+
+  <p style="font-size:13px;color:var(--gray-mid)">Foto: NK Ivančna Gorica</p>
+
+</div>
+
+<!-- GALERIJA -->
+<div class="gallery">
+  <h2>Fotografije</h2>
+  <div class="gallery-grid">
+    <!-- ZAMENJAJ src z dejanskimi slikami -->
+    <a href="novica1_1.jpg">
+      <img src="novica1_1.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
+           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 1'">
+    </a>
+    <a href="novica1_2.jpg">
+      <img src="novica1_2.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
+           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 2'">
+    </a>
+    <a href="novica1_3.jpg">
+      <img src="novica1_3.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
+           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 3'">
+    </a>
+    <a href="novica1_4.jpg">
+      <img src="novica1_4.jpg" alt="Tekma NK Ivančna Gorica - NK Dragomer"
+           onerror="this.parentElement.className='gallery-placeholder';this.parentElement.innerHTML='Slika 4'">
+    </a>
+  </div>
+</div>
+
+<!-- SORODNE NOVICE -->
+<div class="related">
+  <div class="wrap">
+    <div class="sh" style="margin-bottom:1.5rem">
+      <h2>Sorodne <em>Novice</em></h2>
+      <div class="sh-line"></div>
+    </div>
+    <div class="related-grid">
+      <a href="novica.html" class="related-card">
+        <div class="related-card-img dark"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Člani</div>
+          <h3>Zimske priprave &mdash; poročilo s prvega tedna</h3>
+          <div class="related-date">10. januar 2026</div>
+        </div>
+      </a>
+      <a href="novica.html" class="related-card">
+        <div class="related-card-img"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Klub</div>
+          <h3>Vpis 2025/26 je odprt</h3>
+          <div class="related-date">1. februar 2026</div>
+        </div>
+      </a>
+      <a href="novica.html" class="related-card">
+        <div class="related-card-img red"></div>
+        <div class="related-card-body">
+          <div class="related-cat">Tabor</div>
+          <h3>Poletni tabor 2026</h3>
+          <div class="related-date">25. januar 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<site-footer></site-footer>
+
+</body>
+</html>
