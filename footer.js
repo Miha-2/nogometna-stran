@@ -5,8 +5,8 @@ class SiteFooter extends HTMLElement {
         <div class="footer-grid">
           <div>
             <div class="fn">NK Ivančna Gorica</div>
-            <div class="ft">Gremo Risi! · Est. 1973</div>
-            <p class="fb">Etabliran klub iz Ivančne Gorice z bogato tradicijo.</p>
+            <div class="ft">Gremo Risi! · Od leta 1973</div>
+            <p class="fb">Domači klub iz Ivančne Gorice z bogato tradicijo.</p>
           </div>
           <div class="fc">
             <h4>Klub</h4>
