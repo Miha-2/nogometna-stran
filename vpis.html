@@ -37,12 +37,13 @@
 
   /* ── TRENERJI ──────────────────────────────────────── */
   .trener-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1px; background:var(--border); }
-  .trener-card { background:white; padding:1.5rem; display:flex; gap:1.2rem; align-items:center; }
-  .trener-avatar { width:52px; height:52px; background:var(--red); border-radius:2px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.3rem; color:white; }
+  .trener-card { background:white; padding:1.5rem; display:flex; gap:1.2rem; align-items:flex-start; }
+  .trener-badge { display:flex; flex-direction:column; align-items:center; gap:0; flex-shrink:0; border-radius:2px; overflow:hidden; }
+  .trener-avatar { width:52px; height:52px; background:var(--red); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.3rem; color:white; }
   .trener-info { flex:1; }
   .trener-sel { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:3px; }
   .trener-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; color:var(--gray-dark); margin-bottom:6px; }
-  .trener-letnik { font-size:0.78rem; color:var(--gray-mid); letter-spacing:0.5px; margin-bottom:6px; }
+  .trener-letnik { width:52px; background:#a00; color:rgba(255,255,255,0.85); font-size:0.65rem; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.5px; text-align:center; padding:2px 0; }
   .trener-tel { display:flex; align-items:center; gap:6px; font-size:14px; color:var(--gray-mid); text-decoration:none; transition:color 0.15s; }
   .trener-tel:hover { color:var(--red); }
 
@@ -164,122 +165,146 @@
       <div class="trener-grid">
 
         <div class="trener-card">
-          <div class="trener-avatar" style="font-size:1.1rem">Člani</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar" style="font-size:1.1rem">Člani</div>
+            <div class="trener-letnik">2006+</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Člani</div>
             <div class="trener-name">Kovačevič Goran</div>
             <a href="tel:041261644" class="trener-tel">041 261 644</a>
-            <div class="trener-letnik">roj. 2006 in starejši</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U19</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U19</div>
+            <div class="trener-letnik">2007-08</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Mladinci U19</div>
             <div class="trener-name">Kovačevič Goran</div>
             <a href="tel:041261644" class="trener-tel">041 261 644</a>
-            <div class="trener-letnik">roj. 2007 – 2008</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U17</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U17</div>
+            <div class="trener-letnik">2009-10</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Kadeti U17</div>
             <div class="trener-name">Harbaš Edis</div>
             <a href="tel:031328484" class="trener-tel">031 328 484</a>
-            <div class="trener-letnik">roj. 2009 – 2010</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U15</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U15</div>
+            <div class="trener-letnik">2011</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Starejši dečki U15</div>
             <div class="trener-name">Lukman Žiga</div>
             <a href="tel:031791235" class="trener-tel">031 791 235</a>
-            <div class="trener-letnik">roj. 2011</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U14</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U14</div>
+            <div class="trener-letnik">2012</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Starejši dečki U14</div>
             <div class="trener-name">Pate Marko</div>
             <a href="tel:041746758" class="trener-tel">041 746 758</a>
-            <div class="trener-letnik">roj. 2012</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U13</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U13</div>
+            <div class="trener-letnik">2013</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Mlajši dečki U13</div>
             <div class="trener-name">Jankulov Marko</div>
             <a href="tel:031491997" class="trener-tel">031 491 997</a>
-            <div class="trener-letnik">roj. 2013</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U12</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U12</div>
+            <div class="trener-letnik">2014</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Mlajši dečki U12</div>
             <div class="trener-name">Barle Marcel</div>
             <a href="tel:031527568" class="trener-tel">031 527 568</a>
-            <div class="trener-letnik">roj. 2014</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U11</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U11</div>
+            <div class="trener-letnik">2015</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Cicibani U11</div>
             <div class="trener-name">Pate Marko</div>
             <a href="tel:041746758" class="trener-tel">041 746 758</a>
-            <div class="trener-letnik">roj. 2015</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U10</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U10</div>
+            <div class="trener-letnik">2016</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Cicibani U10</div>
             <div class="trener-name">Pantič Danijel</div>
             <a href="tel:051680491" class="trener-tel">051 680 491</a>
-            <div class="trener-letnik">roj. 2016</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U9</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U9</div>
+            <div class="trener-letnik">2017</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Cicibani U9</div>
             <div class="trener-name">Glavica Marijo</div>
             <a href="tel:070191992" class="trener-tel">070 191 992</a>
-            <div class="trener-letnik">roj. 2017</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U8</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U8</div>
+            <div class="trener-letnik">2018</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Cicibani U8</div>
             <div class="trener-name">Perpar Miha</div>
             <a href="tel:051224256" class="trener-tel">051 224 256</a>
-            <div class="trener-letnik">roj. 2018</div>
           </div>
         </div>
 
         <div class="trener-card">
-          <div class="trener-avatar">U7</div>
+                    <div class="trener-badge">
+            <div class="trener-avatar">U7</div>
+            <div class="trener-letnik">2019-20</div>
+          </div>
           <div class="trener-info">
             <div class="trener-sel">Cicibani U7</div>
             <div class="trener-name">Grbac Lan</div>
             <a href="tel:051738971" class="trener-tel">051 738 971</a>
-            <div class="trener-letnik">roj. 2019 – 2020</div>
           </div>
         </div>
 
@@ -304,12 +329,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Mladinci U19</td><td>2007 – 2008</td><td>70 €</td><td>10 (julij 35 €)</td></tr>
-            <tr><td>Kadeti U17</td><td>2009 – 2010</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
-            <tr><td>Starejši dečki U15</td><td>2011 – 2012</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
-            <tr><td>Mlajši dečki U13 / U12</td><td>2013 – 2014</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
-            <tr><td>Cicibani U9 – U11</td><td>2015 – 2017</td><td>65 €</td><td>11</td></tr>
-            <tr><td>Cicibani U8 / U7</td><td>2018 – 2019</td><td>55 €</td><td>10</td></tr>
+            <tr><td>Mladinci U19</td><td>2007-08</td><td>70 €</td><td>10 (julij 35 €)</td></tr>
+            <tr><td>Kadeti U17</td><td>2009-10</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Starejši dečki U15</td><td>2011-12</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Mlajši dečki U13 / U12</td><td>2013-14</td><td>70 €</td><td>11 (julij 35 €)</td></tr>
+            <tr><td>Cicibani U9 – U11</td><td>2015-17</td><td>65 €</td><td>11</td></tr>
+            <tr><td>Cicibani U8 / U7</td><td>2018-19</td><td>55 €</td><td>10</td></tr>
           </tbody>
         </table>
 
