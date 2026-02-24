@@ -2,17 +2,29 @@ class SiteNav extends HTMLElement {
   connectedCallback() {
     const active = this.getAttribute('active') || '';
 
-    // Izračunaj relativno pot do korena glede na globino trenutne strani
-    const depth = window.location.pathname.split('/').filter(Boolean).length - 1;
-    const root = depth > 0 ? '../'.repeat(depth) : '';
+    // Determine root path: works for both file:// and http://
+    const isFile = location.protocol === 'file:';
+    let root = '';
+    if (isFile) {
+      // Count how deep we are by looking at the script src path
+      const scripts = document.querySelectorAll('script[src*="nav.js"]');
+      if (scripts.length > 0) {
+        const src = scripts[0].getAttribute('src');
+        const depth = (src.match(/\.\.\//g) || []).length;
+        root = depth > 0 ? '../'.repeat(depth) : '';
+      }
+    } else {
+      const depth = window.location.pathname.split('/').filter(Boolean).length - 1;
+      root = depth > 0 ? '../'.repeat(depth) : '';
+    }
 
     const links = [
-      { href: `${root}index.html`,  label: 'Domov' },
-      { href: '#',                  label: 'Člani' },
-      { href: '#',                  label: 'Akademija' },
-      { href: '#',                  label: 'Za starše' },
-      { href: `${root}novice.html`, label: 'Novice' },
-      { href: `${root}klub.html`,   label: 'Klub' },
+      { href: `${root}index.html`,  label: 'Domov',     key: 'domov' },
+      { href: '#',                  label: 'Člani',     key: 'clani' },
+      { href: '#',                  label: 'Akademija', key: 'akademija' },
+      { href: '#',                  label: 'Za starše', key: 'za-starse' },
+      { href: `${root}novice.html`, label: 'Novice',    key: 'novice' },
+      { href: `${root}klub.html`,   label: 'Klub',      key: 'klub' },
     ];
 
     this.innerHTML = `
@@ -26,14 +38,13 @@ class SiteNav extends HTMLElement {
         </button>
         <ul class="nav-links" id="navLinks">
           ${links.map(l => `
-            <li><a href="${l.href}" ${l.label.toLowerCase().replace(/č/g,'c').replace(/š/g,'s') === active ? 'class="active"' : ''}>${l.label}</a></li>
+            <li><a href="${l.href}" ${l.key === active ? 'class="active"' : ''}>${l.label}</a></li>
           `).join('')}
           <li><a href="${root}vpis.html" class="nav-cta ${active === 'vpis' ? 'active' : ''}">Vpis 2025/26</a></li>
         </ul>
       </nav>
     `;
 
-    // Hamburger toggle
     const btn = this.querySelector('#hamburger');
     const navLinks = this.querySelector('#navLinks');
     btn.addEventListener('click', () => {
